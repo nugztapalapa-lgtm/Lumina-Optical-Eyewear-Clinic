@@ -1,0 +1,6 @@
+{
+  "name": "Lumina Optical & Eyewear Clinic",
+  "description": "Bespoke prescription eyewear, comprehensive clinical eye examinations, and artisanal frame fittings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
