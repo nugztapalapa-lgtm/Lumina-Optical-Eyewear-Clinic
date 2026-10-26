@@ -222,14 +222,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
         <div className="pt-8 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500">
           <p>© {new Date().getFullYear()} Krostell Optik & Eyewear Clinic, PT. Hak cipta dilindungi undang-undang.</p>
           <div className="flex flex-wrap items-center gap-4">
-            <a
-              href="/krostell-website.zip"
-              download="krostell-website.zip"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-medium transition-colors cursor-pointer"
-            >
-              <span>Unduh krostell-website.zip</span>
-            </a>
-            <span aria-hidden="true" className="hidden sm:inline">·</span>
             <span>Rekanan Asuransi: BPJS, AdMedika, Mandiri Inhealth, Prudential & Allianz</span>
             <span aria-hidden="true" className="hidden sm:inline">·</span>
             <span>Praktik Optometri Berizin Resmi Kemenkes RI</span>
