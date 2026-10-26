@@ -12,6 +12,7 @@ import {
   LENS_OPTIONS,
   LENS_MATERIALS,
   AVAILABLE_COATINGS,
+  formatRupiah,
 } from '../data/mockOpticalData';
 import { GlassesFrameSvg } from './GlassesFrameSvg';
 import { X, Check, Upload, HelpCircle, FileText } from 'lucide-react';
@@ -55,7 +56,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   const [osAxis, setOsAxis] = useState('095');
   const [pdValue, setPdValue] = useState(63);
   const [uploadedFileName, setUploadedFileName] = useState('');
-  const [doctorClinicName, setDoctorClinicName] = useState('Lumina Optical Willow Glen (On File)');
+  const [doctorClinicName, setDoctorClinicName] = useState('Krostell Optik Senopati (Tersimpan di Sistem)');
 
   // Active step in modal
   const [activeStep, setActiveStep] = useState<'frame-lenses' | 'prescription'>('frame-lenses');
@@ -129,7 +130,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950">
           <div className="flex items-center gap-3">
             <h2 id="modal-title" className="text-lg font-serif font-semibold text-stone-900 dark:text-stone-100">
-              Customize {product.name}
+              Kustomisasi {product.name}
             </h2>
             <span className="text-xs text-stone-500 dark:text-stone-400 hidden sm:inline">
               · {selectedColor.name} · {product.material}
@@ -140,7 +141,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div className="text-right">
               <span className="text-xs text-stone-500 dark:text-stone-400 mr-2">Total</span>
               <span className="text-base font-bold text-stone-900 dark:text-stone-100 tabular-nums">
-                ${grandTotal}
+                {formatRupiah(grandTotal)}
               </span>
             </div>
             <button
@@ -162,7 +163,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 : 'border-transparent text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
             }`}
           >
-            1. Frame Color & Lens Options
+            1. Warna Bingkai & Pilihan Lensa
           </button>
           <button
             onClick={() => setActiveStep('prescription')}
@@ -172,7 +173,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 : 'border-transparent text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
             }`}
           >
-            2. Prescription & Pupillary Distance (PD)
+            2. Resep Kacamata & Jarak Pupil (PD)
           </button>
         </div>
 
@@ -191,7 +192,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <div className="mt-4 text-center">
                     <p className="text-xs font-medium text-stone-800 dark:text-stone-200">{selectedColor.name}</p>
                     <p className="text-[11px] text-stone-500 dark:text-stone-400 font-mono mt-0.5">
-                      Lens: {product.dimensions.lensWidth}mm · Bridge: {product.dimensions.bridgeWidth}mm · Temple: {product.dimensions.templeLength}mm
+                      Lensa: {product.dimensions.lensWidth}mm · Bridge: {product.dimensions.bridgeWidth}mm · Tangkai: {product.dimensions.templeLength}mm
                     </p>
                   </div>
                 </div>
@@ -199,7 +200,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {/* Color Selection */}
                 <div className="space-y-2">
                   <label className="text-xs font-semibold text-stone-700 dark:text-stone-300 block">
-                    Choose Acetate / Titanium Finish:
+                    Pilih Warna Asetat / Titanium:
                   </label>
                   <div className="grid grid-cols-1 gap-2">
                     {product.colors.map((color) => (
@@ -233,7 +234,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
                 {/* Frame Details */}
                 <div className="space-y-1.5 pt-2 text-xs text-stone-600 dark:text-stone-400 border-t border-stone-100 dark:border-stone-800">
-                  <p className="font-semibold text-stone-800 dark:text-stone-200">Craftsmanship Details:</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-200">Kualitas Pembuatan:</p>
                   <ul className="space-y-1 pl-4 list-disc text-stone-500 dark:text-stone-400">
                     {product.details.map((detail, idx) => (
                       <li key={idx}>{detail}</li>
@@ -248,9 +249,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <label className="text-xs font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200">
-                      Step A: Lens Vision Type
+                      Langkah A: Tipe Penglihatan Lensa
                     </label>
-                    <span className="text-xs text-teal-800 dark:text-teal-400 font-medium">Doctor Verified</span>
+                    <span className="text-xs text-teal-800 dark:text-teal-400 font-medium">Diverifikasi Dokter</span>
                   </div>
 
                   <div className="grid grid-cols-1 gap-2.5">
@@ -274,7 +275,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                             </span>
                           </div>
                           <span className="text-xs font-semibold text-stone-900 dark:text-stone-100 tabular-nums">
-                            {opt.price === 0 ? 'Included' : `+$${opt.price}`}
+                            {opt.price === 0 ? 'Sudah Termasuk' : `+${formatRupiah(opt.price)}`}
                           </span>
                         </div>
                         <p className="text-xs text-stone-600 dark:text-stone-300 mt-1 leading-relaxed">
@@ -290,9 +291,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <label className="text-xs font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200">
-                        Step B: Optical Thickness & Index
+                        Langkah B: Indeks & Ketebalan Lensa
                       </label>
-                      <span className="text-xs text-stone-500 dark:text-stone-400">Higher index = lighter & thinner</span>
+                      <span className="text-xs text-stone-500 dark:text-stone-400">Semakin tinggi indeks = semakin tipis</span>
                     </div>
 
                     <div className="space-y-2">
@@ -309,7 +310,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                           <div className="flex items-center justify-between">
                             <span className="font-semibold text-stone-900 dark:text-stone-100">{mat.name}</span>
                             <span className="font-semibold text-stone-900 dark:text-stone-100 tabular-nums">
-                              {mat.price === 0 ? 'Standard ($0)' : `+$${mat.price}`}
+                              {mat.price === 0 ? 'Standar (Gratis)' : `+${formatRupiah(mat.price)}`}
                             </span>
                           </div>
                           <p className="text-stone-600 dark:text-stone-300 mt-0.5">{mat.description}</p>
@@ -322,7 +323,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {/* 3. Lens Coatings */}
                 <div className="space-y-3">
                   <label className="text-xs font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200 block">
-                    Step C: Performance Coatings & Protection
+                    Langkah C: Lapisan Kinerja & Perlindungan Lensa
                   </label>
 
                   <div className="space-y-2">
@@ -355,7 +356,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                           </div>
 
                           <span className="font-semibold text-stone-900 dark:text-stone-100 shrink-0 tabular-nums">
-                            {coating.price === 0 ? 'Included' : `+$${coating.price}`}
+                            {coating.price === 0 ? 'Termasuk' : `+${formatRupiah(coating.price)}`}
                           </span>
                         </div>
                       );
@@ -369,10 +370,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div className="space-y-7 max-w-2xl mx-auto">
               <div className="text-center space-y-1">
                 <h3 className="text-xl font-serif font-semibold text-stone-900 dark:text-stone-100">
-                  Prescription & Pupillary Distance Details
+                  Data Resep Kacamata & Jarak Pupil (PD)
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400">
-                  Provide your optical measurements so our clinical edging laboratory can center your lenses.
+                  Masukkan parameter resep mata Anda agar lab internal Krostell dapat memotong dan memasang lensa dengan presisi tepat.
                 </p>
               </div>
 
@@ -386,7 +387,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                   }`}
                 >
-                  Enter Rx Values
+                  Input Angka Resep
                 </button>
                 <button
                   onClick={() => setRxMethod('upload')}
@@ -396,7 +397,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                   }`}
                 >
-                  Upload Rx Photo
+                  Upload Foto Resep
                 </button>
                 <button
                   onClick={() => setRxMethod('clinic-records')}
@@ -406,7 +407,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                   }`}
                 >
-                  Use Clinic Records
+                  Gunakan Rekam Klinik
                 </button>
               </div>
 
@@ -415,16 +416,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   {/* OD / OS Table */}
                   <div className="border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden text-xs">
                     <div className="grid grid-cols-4 bg-stone-100 dark:bg-stone-800 p-2.5 font-semibold text-stone-700 dark:text-stone-300 text-center">
-                      <div className="text-left pl-2">Eye</div>
-                      <div>Sphere (SPH)</div>
-                      <div>Cylinder (CYL)</div>
+                      <div className="text-left pl-2">Mata</div>
+                      <div>Sphere (Minus/Plus)</div>
+                      <div>Cylinder (Silinder)</div>
                       <div>Axis</div>
                     </div>
 
                     {/* OD (Right Eye) */}
                     <div className="grid grid-cols-4 p-3 border-t border-stone-200 dark:border-stone-800 items-center gap-2 bg-white dark:bg-stone-900">
                       <div className="font-semibold text-stone-800 dark:text-stone-200 pl-2">
-                        OD <span className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">(Right Eye)</span>
+                        OD <span className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">(Mata Kanan)</span>
                       </div>
                       <input
                         type="text"
@@ -452,7 +453,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     {/* OS (Left Eye) */}
                     <div className="grid grid-cols-4 p-3 border-t border-stone-200 dark:border-stone-800 items-center gap-2 bg-stone-50/50 dark:bg-stone-900/60">
                       <div className="font-semibold text-stone-800 dark:text-stone-200 pl-2">
-                        OS <span className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">(Left Eye)</span>
+                        OS <span className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">(Mata Kiri)</span>
                       </div>
                       <input
                         type="text"
@@ -482,7 +483,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <div className="p-4 bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-xl space-y-3">
                     <div className="flex items-center justify-between">
                       <label className="text-xs font-semibold text-stone-800 dark:text-stone-200">
-                        Pupillary Distance (PD in mm):
+                        Jarak Pupil (Pupillary Distance / PD dalam mm):
                       </label>
                       <button
                         type="button"
@@ -490,7 +491,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         className="text-xs text-teal-800 dark:text-teal-400 hover:text-teal-950 dark:hover:text-teal-300 font-medium underline underline-offset-2 flex items-center gap-1 cursor-pointer"
                       >
                         <HelpCircle className="w-3.5 h-3.5" />
-                        <span>How to measure my PD?</span>
+                        <span>Cara mengukur PD saya?</span>
                       </button>
                     </div>
 
@@ -508,7 +509,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       </span>
                     </div>
                     <p className="text-[11px] text-stone-500 dark:text-stone-400">
-                      Standard adult single PD is usually between 58mm and 68mm. Average is 63mm.
+                      Standar PD orang dewasa umumnya berkisar antara 58 mm hingga 68 mm. Rata-rata adalah 63 mm.
                     </p>
                   </div>
                 </div>
@@ -521,10 +522,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-stone-800 dark:text-stone-200">
-                      Upload your prescription slip, doctor slip, or photo
+                      Upload foto resep dokter mata atau kartu optik lama Anda
                     </p>
                     <p className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
-                      Accepts JPG, PNG, or PDF up to 10MB
+                      Menerima format JPG, PNG, atau PDF hingga 10MB
                     </p>
                   </div>
 
@@ -539,13 +540,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     htmlFor="rx-upload-input"
                     className="inline-block px-4 py-2 text-xs font-medium bg-stone-900 dark:bg-teal-800 text-white rounded-lg cursor-pointer hover:bg-stone-800 dark:hover:bg-teal-700"
                   >
-                    Select File
+                    Pilih Berkas
                   </label>
 
                   {uploadedFileName && (
                     <div className="flex items-center justify-center gap-1.5 text-xs text-teal-800 dark:text-teal-400 font-medium pt-2">
                       <FileText className="w-4 h-4" />
-                      <span>{uploadedFileName} attached</span>
+                      <span>{uploadedFileName} terlampir</span>
                     </div>
                   )}
                 </div>
@@ -554,20 +555,20 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {rxMethod === 'clinic-records' && (
                 <div className="p-5 border border-stone-200 dark:border-stone-800 rounded-xl bg-stone-50 dark:bg-stone-950 space-y-3 text-xs">
                   <p className="font-semibold text-stone-800 dark:text-stone-200">
-                    Retrieve Prescription From Clinic Database:
+                    Ambil Resep dari Database Klinik Krostell Optik:
                   </p>
                   <p className="text-stone-600 dark:text-stone-300">
-                    If you have received an eye exam at Lumina Optical within the last 2 years, our optometrists will pull your verified digital refraction directly from your chart.
+                    Jika Anda pernah melakukan pemeriksaan mata di Krostell Optik dalam 2 tahun terakhir, dokter kami akan langsung menghubungkan resep rekam medis Anda.
                   </p>
                   <div>
                     <label className="block text-[11px] text-stone-500 dark:text-stone-400 mb-1">
-                      Clinic / Patient Account Note:
+                      Catatan Nama Pasien / Nomor Rekam Medis:
                     </label>
                     <input
                       type="text"
                       value={doctorClinicName}
                       onChange={(e) => setDoctorClinicName(e.target.value)}
-                      placeholder="Your Full Name or Patient Chart Number"
+                      placeholder="Nama Lengkap Pasien atau No. Telepon Terdaftar"
                       className="w-full p-2 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                     />
                   </div>
@@ -585,13 +586,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 onClick={onClose}
                 className="px-4 py-2 text-xs font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 cursor-pointer"
               >
-                Back to Catalog
+                Kembali ke Katalog
               </button>
               <button
                 onClick={() => setActiveStep('prescription')}
                 className="px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
               >
-                Proceed to Prescription & PD (Step 2)
+                Lanjut ke Resep & PD (Langkah 2)
               </button>
             </>
           ) : (
@@ -600,13 +601,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 onClick={() => setActiveStep('frame-lenses')}
                 className="px-4 py-2 text-xs font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 cursor-pointer"
               >
-                ← Back to Lens Selection
+                ← Kembali ke Pemilihan Lensa
               </button>
               <button
                 onClick={handleFinishAndAddToCart}
                 className="px-6 py-2.5 text-xs font-semibold text-white bg-teal-900 dark:bg-teal-700 hover:bg-teal-950 dark:hover:bg-teal-600 rounded-lg cursor-pointer shadow-xs"
               >
-                Confirm & Add to Bag (${grandTotal})
+                Konfirmasi & Masukkan Keranjang ({formatRupiah(grandTotal)})
               </button>
             </>
           )}

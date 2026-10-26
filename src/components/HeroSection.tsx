@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Calendar, CheckCircle2 } from 'lucide-react';
 import { GlassesFrameSvg } from './GlassesFrameSvg';
-import { FEATURED_FRAMES } from '../data/mockOpticalData';
+import { FEATURED_FRAMES, formatRupiah } from '../data/mockOpticalData';
 import { FrameProduct, FrameShape } from '../types/optical';
 
 interface HeroSectionProps {
@@ -29,6 +29,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     setActiveColorIndex(0);
   };
 
+  const shapeLabels: Record<FrameShape, string> = {
+    round: 'Bulat',
+    square: 'Kotak',
+    'cat-eye': 'Cat-Eye',
+    aviator: 'Aviator',
+    geometric: 'Geometris',
+    oval: 'Oval',
+  };
+
   return (
     <section id="home" className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,21 +46,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Left Column: Welcoming Narrative & Direct CTAs */}
           <div className="lg:col-span-7 space-y-6">
             <div className="text-xs uppercase tracking-wider text-teal-800 dark:text-teal-400 font-semibold flex items-center gap-2">
-              <span>Bespoke Eyewear</span>
+              <span>Kacamata Eksklusif</span>
               <span aria-hidden="true">·</span>
-              <span>Doctor-Led Optometry</span>
+              <span>Pemeriksaan Dokter Spesialis</span>
               <span aria-hidden="true">·</span>
-              <span>Willow Glen, CA</span>
+              <span>Senopati, Jakarta Selatan</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif tracking-tight text-stone-900 dark:text-stone-100 leading-[1.15] text-balance">
-              Precision eye care, handcrafted frames tailored to your sight.
+              Perawatan mata presisi, bingkai eksklusif dirancang khusus untuk ketajaman pandangan Anda.
             </h1>
 
             <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed max-w-2xl">
-              Welcome to Lumina Optical. We combine clinical optometry examinations with 
-              artisanal prescription eyewear crafted from Japanese titanium and Italian acetate. 
-              Enjoy clear vision with zero distortion, fitted by licensed optometrists.
+              Selamat datang di Krostell Optik. Kami memadukan pemeriksaan klinis refraksi mata komprehensif 
+              dengan kacamata resep berkualitas tinggi berbahan beta-titanium Jepang dan asetat Italia. 
+              Nikmati penglihatan jernih tanpa distorsi dengan fitting presisi oleh dokter ahli.
             </p>
 
             {/* Direct Action Points */}
@@ -60,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 onClick={onExploreCatalog}
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 text-sm font-semibold text-white bg-teal-900 hover:bg-teal-950 dark:bg-teal-800 dark:hover:bg-teal-700 rounded-lg shadow-sm active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
               >
-                <span>Browse Prescription Frames</span>
+                <span>Jelajahi Koleksi Bingkai</span>
                 <ArrowRight className="w-4 h-4 text-teal-200" />
               </button>
 
@@ -69,7 +78,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="inline-flex items-center gap-2 px-5 py-3.5 text-sm font-medium text-stone-800 dark:text-stone-200 bg-white dark:bg-stone-800 hover:bg-stone-100 dark:hover:bg-stone-700 border border-stone-300 dark:border-stone-700 rounded-lg transition-colors cursor-pointer whitespace-nowrap"
               >
                 <Calendar className="w-4 h-4 text-stone-600 dark:text-stone-400" />
-                <span>Schedule Eye Exam</span>
+                <span>Jadwalkan Periksa Mata</span>
               </button>
             </div>
 
@@ -77,15 +86,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="pt-4 border-t border-stone-200 dark:border-stone-800 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-stone-600 dark:text-stone-400">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" />
-                <span>VSP & EyeMed Accepted</span>
+                <span>Klaim Asuransi Diterima</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" />
-                <span>Doctor-Verified Rx</span>
+                <span>Resep Diverifikasi Dokter</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" />
-                <span>2-Year Lens Warranty</span>
+                <span>Garansi Lensa 2 Tahun</span>
               </div>
             </div>
           </div>
@@ -97,16 +106,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-xs uppercase tracking-wider text-stone-500 dark:text-stone-400 font-medium">
-                    Virtual Frame Bar
+                    Studio Bingkai Virtual
                   </span>
                   <h3 className="text-lg font-serif font-semibold text-stone-900 dark:text-stone-100">
                     {activeFrame.name}
                   </h3>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs text-stone-500 dark:text-stone-400">From</span>
-                  <p className="text-lg font-semibold text-stone-900 dark:text-stone-100 tabular-nums">
-                    ${activeFrame.basePrice}
+                  <span className="text-xs text-stone-500 dark:text-stone-400">Mulai dari</span>
+                  <p className="text-base sm:text-lg font-semibold text-stone-900 dark:text-stone-100 tabular-nums">
+                    {formatRupiah(activeFrame.basePrice)}
                   </p>
                 </div>
               </div>
@@ -123,7 +132,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                         : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                     }`}
                   >
-                    {shape}
+                    {shapeLabels[shape] || shape}
                   </button>
                 ))}
               </div>
@@ -140,13 +149,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {/* Color Swatch & Optical Geometry */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-stone-600 dark:text-stone-300 font-medium">Color: {currentColor.name}</span>
+                  <span className="text-stone-600 dark:text-stone-300 font-medium">Warna: {currentColor.name}</span>
                   <div className="flex items-center gap-2">
                     {activeFrame.colors.map((color, idx) => (
                       <button
                         key={color.id}
                         onClick={() => setActiveColorIndex(idx)}
-                        aria-label={`Select color ${color.name}`}
+                        aria-label={`Pilih warna ${color.name}`}
                         className={`w-6 h-6 rounded-full border-2 transition-all cursor-pointer ${
                           activeColorIndex === idx
                             ? 'border-teal-700 dark:border-teal-400 scale-110 shadow-xs'
@@ -164,10 +173,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
                 <div className="flex items-center justify-between pt-2 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-500 dark:text-stone-400">
                   <span>
-                    Size: {activeFrame.dimensions.lensWidth}-{activeFrame.dimensions.bridgeWidth}-
+                    Ukuran: {activeFrame.dimensions.lensWidth}-{activeFrame.dimensions.bridgeWidth}-
                     {activeFrame.dimensions.templeLength} mm
                   </span>
-                  <span>Weight: {activeFrame.weightGrams}g</span>
+                  <span>Bobot: {activeFrame.weightGrams}g</span>
                   <span className="text-stone-700 dark:text-stone-300 font-medium">{activeFrame.material}</span>
                 </div>
               </div>
@@ -178,13 +187,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   onClick={() => onSelectProduct(activeFrame)}
                   className="w-full py-2.5 px-3 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg text-center transition-colors cursor-pointer"
                 >
-                  Configure Lenses
+                  Konfigurasi Lensa
                 </button>
                 <button
                   onClick={onOpenPdTool}
                   className="w-full py-2.5 px-3 text-xs font-medium text-stone-700 dark:text-stone-300 bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 rounded-lg text-center transition-colors cursor-pointer"
                 >
-                  Measure PD Guide
+                  Panduan Ukur PD
                 </button>
               </div>
             </div>
@@ -195,19 +204,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="mt-14 pt-8 border-t border-stone-200 dark:border-stone-800 grid grid-cols-2 md:grid-cols-4 gap-6 text-stone-800 dark:text-stone-200">
           <div>
             <div className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100 tabular-nums">15+</div>
-            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Years Local Clinic Care</div>
+            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Tahun Praktik Klinis Optometri</div>
           </div>
           <div>
             <div className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100 tabular-nums">4.9 ★</div>
-            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Over 620+ Verified Patients</div>
+            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Lebih dari 620+ Pasien Terverifikasi</div>
           </div>
           <div>
-            <div className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">Same-Day</div>
-            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Digital In-House Lens Edging</div>
+            <div className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">Lab Sendiri</div>
+            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Edging Digital Presisi di Hari yang Sama</div>
           </div>
           <div>
             <div className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">100%</div>
-            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Prescription Accuracy Guarantee</div>
+            <div className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Garansi Akurasi Resep Dokter</div>
           </div>
         </div>
       </div>

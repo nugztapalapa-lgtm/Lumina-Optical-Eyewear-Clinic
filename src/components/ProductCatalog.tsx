@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FrameProduct, FrameShape, FrameColor } from '../types/optical';
-import { FEATURED_FRAMES } from '../data/mockOpticalData';
+import { FEATURED_FRAMES, formatRupiah } from '../data/mockOpticalData';
 import { GlassesFrameSvg } from './GlassesFrameSvg';
 import { Search, ArrowUpDown } from 'lucide-react';
 
@@ -24,6 +24,24 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
 
   const handleCardColorChange = (frameId: string, colorIndex: number) => {
     setSelectedCardColors((prev) => ({ ...prev, [frameId]: colorIndex }));
+  };
+
+  const shapeLabels: Record<FrameShape | 'all', string> = {
+    all: 'Semua',
+    round: 'Bulat',
+    square: 'Kotak',
+    'cat-eye': 'Cat-Eye',
+    aviator: 'Aviator',
+    geometric: 'Geometris',
+    oval: 'Oval',
+  };
+
+  const faceLabels: Record<string, string> = {
+    all: 'Semua Wajah',
+    Round: 'Wajah Bulat',
+    Square: 'Wajah Kotak',
+    Oval: 'Wajah Oval',
+    Heart: 'Wajah Hati',
   };
 
   // Filter and sort products
@@ -68,14 +86,14 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 dark:border-stone-800 pb-6">
           <div className="space-y-2">
             <span className="text-xs uppercase tracking-wider text-teal-800 dark:text-teal-400 font-semibold">
-              The Eyewear Atelier
+              Atelier Kacamata
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-stone-900 dark:text-stone-100 tracking-tight">
-              Prescription Frames & Precision Optics
+              Bingkai Kacamata Resep & Optik Presisi
             </h2>
             <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 max-w-xl">
-              Each frame is calibrated for optical centering and crafted to withstand years of daily use. 
-              All prescription orders include anti-reflective coating and verified Pupillary Distance alignment.
+              Setiap bingkai dikalibrasi presisi untuk titik fokus pupil Anda. 
+              Semua pemesanan kacamata resep sudah termasuk lapisan anti-refleksi dan jaminan akurasi Pupillary Distance (PD).
             </p>
           </div>
 
@@ -84,7 +102,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               onClick={onOpenPdTool}
               className="px-4 py-2 text-xs font-medium text-stone-700 dark:text-stone-200 bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 border border-stone-200 dark:border-stone-800 rounded-lg shadow-xs transition-colors cursor-pointer"
             >
-              Measure Pupillary Distance (PD)
+              Ukur Jarak Pupil (PD)
             </button>
           </div>
         </div>
@@ -97,7 +115,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
               <input
                 type="text"
-                placeholder="Search by frame name, shape or material..."
+                placeholder="Cari nama bingkai, bentuk, atau bahan..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 text-sm bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-100 focus:border-teal-700 focus:outline-none placeholder:text-stone-400 dark:placeholder:text-stone-500"
@@ -114,7 +132,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                 }`}
               >
-                All Materials
+                Semua Bahan
               </button>
               <button
                 onClick={() => setMaterialFilter('titanium')}
@@ -124,7 +142,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                 }`}
               >
-                Japanese Titanium
+                Titanium Jepang
               </button>
               <button
                 onClick={() => setMaterialFilter('acetate')}
@@ -134,47 +152,47 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200'
                 }`}
               >
-                Italian Acetate
+                Asetat Italia
               </button>
             </div>
 
             {/* Sort Dropdown */}
             <div className="flex items-center gap-2 text-xs text-stone-600 dark:text-stone-400 self-end md:self-auto">
               <ArrowUpDown className="w-3.5 h-3.5 text-stone-500" />
-              <span className="font-medium">Sort:</span>
+              <span className="font-medium">Urutkan:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
                 className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-200 py-1.5 px-2.5 rounded-lg text-xs focus:outline-none focus:border-teal-700 cursor-pointer"
               >
-                <option value="featured">Featured Collection</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="weight">Featherlight Weight</option>
+                <option value="featured">Koleksi Pilihan</option>
+                <option value="price-asc">Harga: Rendah ke Tinggi</option>
+                <option value="price-desc">Harga: Tinggi ke Rendah</option>
+                <option value="weight">Paling Ringan</option>
               </select>
             </div>
           </div>
 
           {/* Secondary Sub-filters: Shape & Face Shape */}
           <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-stone-600 dark:text-stone-400">
-            <span className="font-medium mr-1 text-stone-700 dark:text-stone-300">Silhouette:</span>
+            <span className="font-medium mr-1 text-stone-700 dark:text-stone-300">Bentuk:</span>
             {(['all', 'round', 'square', 'cat-eye', 'aviator', 'geometric'] as (FrameShape | 'all')[]).map(
               (shape) => (
                 <button
                   key={shape}
                   onClick={() => setShapeFilter(shape)}
-                  className={`px-2.5 py-1 rounded-md capitalize transition-colors cursor-pointer ${
+                  className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
                     shapeFilter === shape
                       ? 'bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 font-semibold'
                       : 'bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800'
                   }`}
                 >
-                  {shape}
+                  {shapeLabels[shape]}
                 </button>
               )
             )}
 
-            <span className="font-medium ml-3 mr-1 text-stone-700 dark:text-stone-300">Face Fit:</span>
+            <span className="font-medium ml-3 mr-1 text-stone-700 dark:text-stone-300">Bentuk Wajah:</span>
             {['all', 'Round', 'Square', 'Oval', 'Heart'].map((face) => (
               <button
                 key={face}
@@ -185,7 +203,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     : 'bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800'
                 }`}
               >
-                {face === 'all' ? 'All Faces' : `${face} Face`}
+                {faceLabels[face]}
               </button>
             ))}
           </div>
@@ -194,9 +212,9 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         {/* Product Grid: 3-column desktop, 2-column tablet */}
         {filteredProducts.length === 0 ? (
           <div className="bg-white dark:bg-stone-900 rounded-xl p-12 text-center border border-stone-200 dark:border-stone-800 space-y-3">
-            <p className="text-base text-stone-700 dark:text-stone-200 font-medium">No frames matched your selected filters.</p>
+            <p className="text-base text-stone-700 dark:text-stone-200 font-medium">Tidak ada bingkai yang cocok dengan filter Anda.</p>
             <p className="text-xs text-stone-500 dark:text-stone-400">
-              Try resetting your search query or choosing "All Materials".
+              Coba atur ulang kata kunci pencarian atau pilih "Semua Bahan".
             </p>
             <button
               onClick={() => {
@@ -205,9 +223,9 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                 setShapeFilter('all');
                 setFaceShapeFilter('all');
               }}
-              className="mt-2 px-4 py-2 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 rounded-lg hover:bg-stone-800 dark:hover:bg-teal-700"
+              className="mt-2 px-4 py-2 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 rounded-lg hover:bg-stone-800 dark:hover:bg-teal-700 cursor-pointer"
             >
-              Reset Filters
+              Reset Filter
             </button>
           </div>
         ) : (
@@ -234,7 +252,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                     {/* Subtle status tag if applicable */}
                     {product.isNew && (
                       <span className="absolute top-3 left-3 text-[11px] font-medium tracking-wide text-teal-800 dark:text-teal-300 bg-teal-50/90 dark:bg-teal-950/80 border border-teal-200 dark:border-teal-800 px-2 py-0.5 rounded">
-                        New Release
+                        Koleksi Baru
                       </span>
                     )}
                   </div>
@@ -260,9 +278,9 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                         </h3>
                         <div className="text-right">
                           <span className="text-sm font-semibold text-stone-900 dark:text-stone-100 tabular-nums">
-                            ${product.basePrice}
+                            {formatRupiah(product.basePrice)}
                           </span>
-                          <span className="text-[11px] text-stone-400 dark:text-stone-500 block -mt-0.5">with Rx lenses</span>
+                          <span className="text-[11px] text-stone-400 dark:text-stone-500 block -mt-0.5">termasuk lensa resep</span>
                         </div>
                       </div>
 
@@ -283,7 +301,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                             <button
                               key={color.id}
                               onClick={() => handleCardColorChange(product.id, cIdx)}
-                              aria-label={`Select ${color.name}`}
+                              aria-label={`Pilih warna ${color.name}`}
                               className={`w-5 h-5 rounded-full border transition-all cursor-pointer ${
                                 activeColorIdx === cIdx
                                   ? 'border-teal-700 dark:border-teal-400 scale-110 shadow-xs ring-1 ring-teal-600'
@@ -304,7 +322,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
                         onClick={() => onSelectProduct(product, activeColor)}
                         className="w-full py-2.5 px-3 text-xs font-semibold text-stone-900 dark:text-stone-100 bg-stone-100 dark:bg-stone-800 hover:bg-stone-900 hover:text-white dark:hover:bg-teal-800 dark:hover:text-white rounded-lg transition-colors cursor-pointer text-center"
                       >
-                        Customize Prescription Lenses
+                        Kustomisasi Lensa Resep
                       </button>
                     </div>
                   </div>

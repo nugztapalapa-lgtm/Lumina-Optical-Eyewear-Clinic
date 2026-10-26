@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CartItem } from '../types/optical';
 import { GlassesFrameSvg } from './GlassesFrameSvg';
+import { formatRupiah } from '../data/mockOpticalData';
 import { X, Trash2, Plus, Minus, ArrowRight, ShieldCheck, Tag } from 'lucide-react';
 
 interface CartDrawerProps {
@@ -30,17 +31,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   if (!isOpen) return null;
 
   const rawSubtotal = items.reduce((sum, item) => sum + item.totalPrice * item.quantity, 0);
-  const discountAmount = appliedPromo.toUpperCase() === 'AUTUMN26' ? 25 : 0;
+  const discountAmount = appliedPromo.toUpperCase() === 'KROSTELL26' ? 250000 : 0;
   const finalTotal = Math.max(0, rawSubtotal - discountAmount);
 
   const handleApplyPromoCode = (e: React.FormEvent) => {
     e.preventDefault();
     const clean = promoInput.trim().toUpperCase();
-    if (clean === 'AUTUMN26') {
-      onApplyPromo('AUTUMN26');
+    if (clean === 'KROSTELL26') {
+      onApplyPromo('KROSTELL26');
       setPromoError('');
     } else {
-      setPromoError('Invalid coupon. Try AUTUMN26 for $25 off.');
+      setPromoError('Kupon tidak valid. Coba KROSTELL26 untuk potongan Rp 250.000.');
     }
   };
 
@@ -62,7 +63,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950">
             <h2 id="cart-drawer-title" className="text-base font-serif font-semibold text-stone-900 dark:text-stone-100">
-              Shopping Bag ({items.reduce((acc, i) => acc + i.quantity, 0)})
+              Tas Belanja ({items.reduce((acc, i) => acc + i.quantity, 0)})
             </h2>
             <button
               onClick={onClose}
@@ -76,13 +77,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {items.length === 0 ? (
               <div className="py-16 text-center space-y-3 text-stone-500 dark:text-stone-400 text-xs">
-                <p className="text-sm font-medium text-stone-700 dark:text-stone-300">Your shopping bag is empty.</p>
-                <p>Browse our handcrafted frames to configure prescription lenses.</p>
+                <p className="text-sm font-medium text-stone-700 dark:text-stone-300">Tas belanja Anda masih kosong.</p>
+                <p>Jelajahi koleksi kacamata buatan tangan kami dan sesuaikan lensa resep Anda.</p>
                 <button
                   onClick={onClose}
                   className="mt-2 px-5 py-2 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                 >
-                  Explore Collection
+                  Jelajahi Koleksi
                 </button>
               </div>
             ) : (
@@ -109,15 +110,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                             {item.product.name}
                           </h4>
                           <span className="font-bold text-stone-900 dark:text-stone-100 tabular-nums">
-                            ${item.totalPrice * item.quantity}
+                            {formatRupiah(item.totalPrice * item.quantity)}
                           </span>
                         </div>
 
                         <p className="text-stone-500 dark:text-stone-400 text-[11px]">
-                          Color: {item.selectedColor.name}
+                          Warna: {item.selectedColor.name}
                         </p>
                         <p className="text-stone-700 dark:text-stone-300 font-medium text-[11px] capitalize">
-                          Lens: {item.lensType.replace('-', ' ')}
+                          Lensa: {item.lensType.replace('-', ' ')}
                         </p>
                       </div>
                     </div>
@@ -126,7 +127,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     {item.prescription && (
                       <div className="p-2.5 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg text-[11px] text-stone-600 dark:text-stone-400 space-y-1">
                         <div className="font-semibold text-stone-800 dark:text-stone-200 flex justify-between">
-                          <span>Prescription Specs</span>
+                          <span>Spesifikasi Resep Dokter</span>
                           <span className="font-mono">PD: {item.prescription.pupillaryDistance}mm</span>
                         </div>
                         {item.prescription.rxMethod === 'manual' ? (
@@ -135,9 +136,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                             <span>OS: SPH {item.prescription.osSphere} CYL {item.prescription.osCylinder} AXIS {item.prescription.osAxis}</span>
                           </div>
                         ) : item.prescription.rxMethod === 'upload' ? (
-                          <span className="text-teal-800 dark:text-teal-400 font-medium">Photo Attached: {item.prescription.uploadedFileName || 'Rx Document'}</span>
+                          <span className="text-teal-800 dark:text-teal-400 font-medium">Foto Terlampir: {item.prescription.uploadedFileName || 'Dokumen Resep'}</span>
                         ) : (
-                          <span className="text-teal-800 dark:text-teal-400 font-medium">Using Lumina Clinic Records</span>
+                          <span className="text-teal-800 dark:text-teal-400 font-medium">Menggunakan Rekam Medis Krostell Optik</span>
                         )}
                       </div>
                     )}
@@ -165,7 +166,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <button
                         onClick={() => onRemoveItem(item.cartItemId)}
                         className="text-stone-400 hover:text-red-700 dark:hover:text-red-400 p-1 transition-colors cursor-pointer"
-                        title="Remove item"
+                        title="Hapus item"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -186,7 +187,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <Tag className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
-                      placeholder="Promo code (e.g. AUTUMN26)"
+                      placeholder="Kode promo (contoh: KROSTELL26)"
                       value={promoInput}
                       onChange={(e) => setPromoInput(e.target.value)}
                       className="w-full pl-8 pr-3 py-1.5 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg text-xs uppercase text-stone-900 dark:text-stone-100 focus:border-teal-700 focus:outline-none"
@@ -196,12 +197,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     type="submit"
                     className="px-3 py-1.5 font-semibold text-stone-800 dark:text-stone-200 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 rounded-lg cursor-pointer"
                   >
-                    Apply
+                    Gunakan
                   </button>
                 </div>
                 {appliedPromo && (
                   <p className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium">
-                    Promo code {appliedPromo} applied (-${discountAmount})
+                    Kode promo {appliedPromo} aktif (-{formatRupiah(discountAmount)})
                   </p>
                 )}
                 {promoError && (
@@ -213,21 +214,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="space-y-1.5 pt-2 border-t border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="font-semibold text-stone-900 dark:text-stone-100 tabular-nums">${rawSubtotal}</span>
+                  <span className="font-semibold text-stone-900 dark:text-stone-100 tabular-nums">{formatRupiah(rawSubtotal)}</span>
                 </div>
                 {discountAmount > 0 && (
                   <div className="flex justify-between text-emerald-700 dark:text-emerald-400">
-                    <span>Discount (AUTUMN26)</span>
-                    <span className="font-semibold tabular-nums">-${discountAmount}</span>
+                    <span>Potongan Diskon (KROSTELL26)</span>
+                    <span className="font-semibold tabular-nums">-{formatRupiah(discountAmount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span>Standard Shipping</span>
-                  <span className="font-semibold text-stone-900 dark:text-stone-100">Free</span>
+                  <span>Pengiriman Standar Seluruh Indonesia</span>
+                  <span className="font-semibold text-stone-900 dark:text-stone-100">Gratis</span>
                 </div>
                 <div className="flex justify-between text-sm font-bold text-stone-900 dark:text-stone-100 pt-2 border-t border-stone-200 dark:border-stone-800">
-                  <span>Estimated Total</span>
-                  <span className="tabular-nums">${finalTotal}</span>
+                  <span>Estimasi Total</span>
+                  <span className="tabular-nums">{formatRupiah(finalTotal)}</span>
                 </div>
               </div>
 
@@ -236,13 +237,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 onClick={onProceedToCheckout}
                 className="w-full flex items-center justify-center gap-2 py-3 px-4 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-teal-900 dark:hover:bg-teal-700 rounded-lg transition-all cursor-pointer shadow-xs active:scale-[0.99]"
               >
-                <span>Proceed to Secure Checkout</span>
+                <span>Lanjut ke Pembayaran Aman</span>
                 <ArrowRight className="w-4 h-4 text-teal-300" />
               </button>
 
               <div className="flex items-center justify-center gap-1.5 text-[11px] text-stone-500 dark:text-stone-400">
                 <ShieldCheck className="w-3.5 h-3.5 text-teal-800 dark:text-teal-400" />
-                <span>256-Bit SSL · Vision Insurance Reimbursement Receipt Included</span>
+                <span>Enkripsi SSL 256-Bit · Termasuk Kwitansi Resmi Reimbursement Asuransi</span>
               </div>
             </div>
           )}

@@ -21,14 +21,14 @@ export const BlogSection: React.FC = () => {
         {/* Header */}
         <div className="max-w-3xl space-y-2">
           <span className="text-xs uppercase tracking-wider text-teal-800 dark:text-teal-400 font-semibold">
-            Clinical Insights & Eyewear Care
+            Wawasan Medis & Perawatan Kacamata
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-stone-900 dark:text-stone-100 tracking-tight">
-            The Lumina Vision Journal
+            Jurnal Kesehatan Mata Krostell
           </h2>
           <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 leading-relaxed">
-            Expert articles and preventative guidance written by our resident Doctors of Optometry 
-            to protect your ocular wellness, ease digital fatigue, and prolong the lifespan of your lenses.
+            Artikel ilmiah dan panduan pencegahan yang disusun langsung oleh dokter spesialis mata kami 
+            untuk menjaga kesehatan penglihatan Anda dan memperpanjang usia pakai kacamata kesayangan Anda.
           </p>
         </div>
 
@@ -60,14 +60,14 @@ export const BlogSection: React.FC = () => {
 
               <div className="pt-3 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between">
                 <span className="text-[11px] text-stone-500 dark:text-stone-400">
-                  By {article.author}
+                  Oleh {article.author}
                 </span>
 
                 <button
                   onClick={() => setSelectedPost(article)}
                   className="inline-flex items-center gap-1 text-xs font-semibold text-teal-900 dark:text-teal-400 hover:text-teal-950 dark:hover:text-teal-300 cursor-pointer"
                 >
-                  <span>Read Article</span>
+                  <span>Baca Artikel</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -79,14 +79,14 @@ export const BlogSection: React.FC = () => {
         <div className="bg-stone-900 dark:bg-stone-900/90 text-stone-100 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-stone-800">
           <div className="space-y-2 max-w-xl">
             <span className="text-xs font-mono uppercase tracking-wider text-teal-300">
-              Daily Optician Tip
+              Tips Harian Optisi Krostell
             </span>
             <h3 className="text-xl font-serif font-semibold text-white">
-              Never use household paper towels or your shirt on coated lenses.
+              Jangan pernah menggunakan tisu kering atau ujung pakaian untuk mengelap lensa.
             </h3>
             <p className="text-xs text-stone-300 leading-relaxed">
-              Wood cellulose fibers in paper towels create irreversible micro-swirls on anti-reflective coatings. 
-              Always rinse with water first, then dry with our complimentary microfiber optical cloth.
+              Serat selulosa kayu pada tisu dapat menggores lapisan anti-pantulan (anti-reflective). 
+              Selalu bilas lensa dengan air mengalir terlebih dahulu, lalu keringkan menggunakan kain lap mikrofiber optik resmi Krostell.
             </p>
           </div>
 
@@ -94,7 +94,7 @@ export const BlogSection: React.FC = () => {
             onClick={() => setSelectedPost(BLOG_ARTICLES[2])}
             className="px-5 py-2.5 text-xs font-semibold text-stone-900 bg-white hover:bg-stone-100 rounded-lg whitespace-nowrap cursor-pointer transition-colors shrink-0"
           >
-            Read Complete Lens Care Guide
+            Baca Panduan Perawatan Lensa
           </button>
         </div>
 
@@ -119,17 +119,17 @@ export const BlogSection: React.FC = () => {
                   <button
                     onClick={handleShare}
                     className="p-1.5 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white rounded-lg hover:bg-stone-200/60 dark:hover:bg-stone-800 transition-colors cursor-pointer flex items-center gap-1 text-xs"
-                    title="Share link"
+                    title="Salin tautan"
                   >
                     {copiedLink ? (
                       <>
                         <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                        <span className="text-emerald-700 dark:text-emerald-400 font-medium">Copied!</span>
+                        <span className="text-emerald-700 dark:text-emerald-400 font-medium">Tersalin!</span>
                       </>
                     ) : (
                       <>
                         <Share2 className="w-4 h-4" />
-                        <span>Share</span>
+                        <span>Bagikan</span>
                       </>
                     )}
                   </button>
@@ -151,7 +151,7 @@ export const BlogSection: React.FC = () => {
                   </h2>
                   <div className="text-xs text-stone-500 dark:text-stone-400 flex items-center gap-2 pt-1">
                     <span className="font-medium text-stone-800 dark:text-stone-200">
-                      Written by {selectedPost.author}
+                      Ditulis oleh {selectedPost.author}
                     </span>
                     <span>({selectedPost.authorRole})</span>
                     <span aria-hidden="true">·</span>
@@ -170,7 +170,7 @@ export const BlogSection: React.FC = () => {
                 <div className="bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 rounded-xl p-5 space-y-2.5">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-teal-900 dark:text-teal-200 flex items-center gap-1.5">
                     <Sparkles className="w-4 h-4 text-teal-700 dark:text-teal-400" />
-                    Doctor Recommended Key Takeaways:
+                    Poin Penting Dokter Spesialis:
                   </h4>
                   <ul className="space-y-1.5 pl-5 list-disc text-xs text-stone-700 dark:text-stone-300">
                     {selectedPost.tips.map((tip, idx) => (
@@ -183,13 +183,13 @@ export const BlogSection: React.FC = () => {
               {/* Modal Footer */}
               <div className="px-6 py-4 border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 flex items-center justify-between">
                 <span className="text-xs text-stone-500 dark:text-stone-400">
-                  Have questions about your vision? Schedule a consult with Dr. Vance.
+                  Ada keluhan dengan penglihatan Anda? Konsultasikan dengan dokter kami di Krostell Optik.
                 </span>
                 <button
                   onClick={() => setSelectedPost(null)}
                   className="px-5 py-2 text-xs font-semibold text-stone-900 dark:text-stone-200 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 rounded-lg cursor-pointer"
                 >
-                  Close
+                  Tutup
                 </button>
               </div>
             </div>

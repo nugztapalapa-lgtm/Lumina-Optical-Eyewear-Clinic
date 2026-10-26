@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CLINIC_INFO, ACCEPTED_INSURANCES } from '../data/mockOpticalData';
-import { Mail, Check, Instagram, Facebook, Twitter, Phone, MapPin } from 'lucide-react';
+import { CLINIC_INFO } from '../data/mockOpticalData';
+import { Check, Instagram, Facebook, Twitter, Phone, MapPin } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -27,10 +27,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-12 border-b border-stone-800 items-center">
           <div className="lg:col-span-6 space-y-2">
             <h3 className="text-xl font-serif font-semibold text-white">
-              Stay ahead in ocular health & new frame releases.
+              Kesehatan mata prima & rilisan koleksi bingkai presisi.
             </h3>
             <p className="text-xs text-stone-400 max-w-md">
-              Receive $50 off your first complete pair or annual comprehensive eye exam, plus seasonal lens care tips.
+              Dapatkan potongan Rp 250.000 untuk pembelian kacamata lengkap pertama atau jadwal pemeriksaan mata rutin, plus panduan berkala perawatan lensa.
             </p>
           </div>
 
@@ -41,20 +41,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                 required
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                placeholder="Enter your email address"
+                placeholder="Masukkan alamat email Anda"
                 className="flex-1 px-4 py-2.5 text-xs bg-stone-800 border border-stone-700 rounded-lg text-white placeholder:text-stone-500 focus:outline-none focus:border-teal-500"
               />
               <button
                 type="submit"
                 className="px-5 py-2.5 text-xs font-semibold text-stone-900 bg-white hover:bg-stone-100 rounded-lg transition-colors cursor-pointer shrink-0"
               >
-                {subscribed ? 'Discount Sent!' : 'Join Lumina Club'}
+                {subscribed ? 'Voucher Terkirim!' : 'Gabung Krostell Club'}
               </button>
             </form>
             {subscribed && (
               <p className="text-[11px] text-teal-400 mt-2 flex items-center gap-1 font-medium">
                 <Check className="w-3.5 h-3.5" />
-                <span>Welcome! Check your inbox for your $50 coupon code.</span>
+                <span>Selamat datang! Periksa kotak masuk email Anda untuk kode potongan Rp 250.000.</span>
               </p>
             )}
           </div>
@@ -65,10 +65,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
           {/* Brand Col */}
           <div className="space-y-3">
             <h4 className="font-serif text-base font-semibold text-white tracking-tight">
-              Lumina Optical
+              Krostell Optik
             </h4>
             <p className="text-stone-400 leading-relaxed">
-              Doctor-led clinical optometry and bespoke handcrafted prescription eyewear in Willow Glen, California.
+              Pusat layanan optometri klinis dipimpin dokter spesialis mata dan kacamata resep presisi buatan tangan di Senopati, Jakarta Selatan.
             </p>
             <div className="pt-1 flex items-center gap-3 text-stone-400">
               <a
@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-white transition-colors"
-                aria-label="Instagram @LuminaOptical"
+                aria-label="Instagram @KrostellOptik"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -104,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
           {/* Clinical Services Links */}
           <div className="space-y-2.5">
             <h4 className="font-semibold text-white uppercase tracking-wider text-[11px]">
-              Clinical Services
+              Layanan Klinis
             </h4>
             <ul className="space-y-1.5 text-stone-400">
               <li>
@@ -112,7 +112,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={onOpenBooking}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  Comprehensive Eye Exams
+                  Pemeriksaan Mata Komprehensif
                 </button>
               </li>
               <li>
@@ -120,7 +120,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={onOpenBooking}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  Contact Lens Evaluations
+                  Evaluasi & Fitting Lensa Kontak
                 </button>
               </li>
               <li>
@@ -128,7 +128,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={onOpenBooking}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  Optomap Retinal Scans
+                  Pemindaian Retina Digital Optomap
                 </button>
               </li>
               <li>
@@ -136,7 +136,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={onOpenBooking}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  Dry Eye Therapy Clinic
+                  Klinik Terapi Sindrom Mata Kering
                 </button>
               </li>
               <li>
@@ -144,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={onOpenBooking}
                   className="hover:text-white transition-colors cursor-pointer text-left"
                 >
-                  Pediatric Vision Care
+                  Perawatan Penglihatan Anak & Remaja
                 </button>
               </li>
             </ul>
@@ -153,7 +153,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
           {/* Eyewear & Optics Links */}
           <div className="space-y-2.5">
             <h4 className="font-semibold text-white uppercase tracking-wider text-[11px]">
-              Eyewear & Care
+              Koleksi & Edukasi Lensa
             </h4>
             <ul className="space-y-1.5 text-stone-400">
               <li>
@@ -161,7 +161,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={() => onNavigate('collection')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Japanese Titanium Frames
+                  Bingkai Titanium Asli Jepang
                 </button>
               </li>
               <li>
@@ -169,7 +169,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={() => onNavigate('collection')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Italian Mazzucchelli Acetate
+                  Asetat Mazzucchelli Italia
                 </button>
               </li>
               <li>
@@ -177,7 +177,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={() => onNavigate('lens-guide')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  High-Index & Progressive Lenses
+                  Lensa High-Index & Progresif Digital
                 </button>
               </li>
               <li>
@@ -185,7 +185,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={() => onNavigate('journal')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Pupillary Distance (PD) Guide
+                  Panduan Jarak Pupil (PD)
                 </button>
               </li>
               <li>
@@ -193,7 +193,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
                   onClick={() => onNavigate('journal')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Lens Cleaning & Maintenance
+                  Perawatan & Pembersihan Lensa
                 </button>
               </li>
             </ul>
@@ -202,7 +202,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
           {/* Location & Practice Info */}
           <div className="space-y-2.5 text-stone-400">
             <h4 className="font-semibold text-white uppercase tracking-wider text-[11px]">
-              Clinic Dispensary
+              Butik & Klinik Optik
             </h4>
             <p className="flex items-start gap-1.5">
               <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0 mt-0.5" />
@@ -213,20 +213,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => 
               <span>{CLINIC_INFO.phone}</span>
             </p>
             <p className="text-[11px] text-stone-500 pt-1">
-              Mon–Fri 9am–6:30pm · Sat 9:30am–4pm
+              Sen–Jum 09.00–18.30 WIB · Sab 09.30–16.00 WIB
             </p>
           </div>
         </div>
 
         {/* Quiet Copyright & Insurance Notice */}
         <div className="pt-8 border-t border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500">
-          <p>© {new Date().getFullYear()} Lumina Optical & Eyewear Clinic, Inc. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <span>HIPAA Compliant</span>
-            <span aria-hidden="true">·</span>
-            <span>VSP & EyeMed Network Provider</span>
-            <span aria-hidden="true">·</span>
-            <span>Licensed California Optometry Practice</span>
+          <p>© {new Date().getFullYear()} Krostell Optik & Eyewear Clinic, PT. Hak cipta dilindungi undang-undang.</p>
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href="/krostell-website.zip"
+              download="krostell-website.zip"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 font-medium transition-colors cursor-pointer"
+            >
+              <span>Unduh krostell-website.zip</span>
+            </a>
+            <span aria-hidden="true" className="hidden sm:inline">·</span>
+            <span>Rekanan Asuransi: BPJS, AdMedika, Mandiri Inhealth, Prudential & Allianz</span>
+            <span aria-hidden="true" className="hidden sm:inline">·</span>
+            <span>Praktik Optometri Berizin Resmi Kemenkes RI</span>
           </div>
         </div>
       </div>

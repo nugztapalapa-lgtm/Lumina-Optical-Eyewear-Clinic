@@ -10,10 +10,10 @@ export const ReviewsSection: React.FC = () => {
 
   // New review form state
   const [authorName, setAuthorName] = useState('');
-  const [location, setLocation] = useState('San Jose, CA');
+  const [location, setLocation] = useState('Jakarta Selatan');
   const [rating, setRating] = useState(5);
-  const [serviceType, setServiceType] = useState('Eye Exam & Prescription Glasses');
-  const [framePurchased, setFramePurchased] = useState('Kanso Titanium Wire');
+  const [serviceType, setServiceType] = useState('Pemeriksaan Mata & Kacamata Resep');
+  const [framePurchased, setFramePurchased] = useState('Soren Acetate');
   const [comment, setComment] = useState('');
 
   const filteredReviews = reviews.filter((r) => {
@@ -30,7 +30,7 @@ export const ReviewsSection: React.FC = () => {
       authorName,
       location,
       rating,
-      date: 'Just now',
+      date: 'Baru saja',
       serviceType,
       framePurchased: framePurchased || undefined,
       verified: true,
@@ -50,13 +50,13 @@ export const ReviewsSection: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 dark:border-stone-800 pb-6">
           <div className="space-y-2">
             <span className="text-xs uppercase tracking-wider text-teal-800 dark:text-teal-400 font-semibold">
-              Verified Patient Experiences
+              Pengalaman Pasien Terverifikasi
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-stone-900 dark:text-stone-100 tracking-tight">
-              What Our Community Sees & Says
+              Apa Kata Pasien Kami
             </h2>
             <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 max-w-xl">
-              Real feedback from local patients fitted with precision prescriptions and custom eyewear.
+              Ulasan nyata dari pasien yang mempercayakan ketajaman penglihatan dan pembuatan kacamata presisi di Krostell Optik.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export const ReviewsSection: React.FC = () => {
               className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-lg shadow-xs cursor-pointer transition-colors"
             >
               <Plus className="w-3.5 h-3.5 text-teal-800 dark:text-teal-400" />
-              <span>Share Your Review</span>
+              <span>Bagikan Pengalaman Anda</span>
             </button>
           </div>
         </div>
@@ -80,11 +80,11 @@ export const ReviewsSection: React.FC = () => {
               ))}
             </div>
             <span className="font-serif font-bold text-base text-stone-900 dark:text-stone-100 tabular-nums">4.9 / 5.0</span>
-            <span className="text-stone-500 dark:text-stone-400">· Over 620 verified exams & fittings</span>
+            <span className="text-stone-500 dark:text-stone-400">· Lebih dari 620 pemeriksaan & fitting terverifikasi</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="text-stone-500 dark:text-stone-400 font-medium mr-1">Filter rating:</span>
+            <span className="text-stone-500 dark:text-stone-400 font-medium mr-1">Filter nilai:</span>
             <button
               onClick={() => setFilterRating('all')}
               className={`px-2.5 py-1 rounded text-xs transition-colors cursor-pointer ${
@@ -93,7 +93,7 @@ export const ReviewsSection: React.FC = () => {
                   : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
               }`}
             >
-              All ({reviews.length})
+              Semua ({reviews.length})
             </button>
             <button
               onClick={() => setFilterRating(5)}
@@ -103,7 +103,7 @@ export const ReviewsSection: React.FC = () => {
                   : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
               }`}
             >
-              5 Stars ({reviews.filter((r) => r.rating === 5).length})
+              Bintang 5 ({reviews.filter((r) => r.rating === 5).length})
             </button>
           </div>
         </div>
@@ -126,7 +126,7 @@ export const ReviewsSection: React.FC = () => {
                   {rev.verified && (
                     <div className="flex items-center gap-1 text-[11px] text-teal-800 dark:text-teal-400 font-medium">
                       <CheckCircle className="w-3 h-3 text-teal-700 dark:text-teal-400" />
-                      <span>Verified Patient</span>
+                      <span>Pasien Terverifikasi</span>
                     </div>
                   )}
                 </div>
@@ -147,7 +147,7 @@ export const ReviewsSection: React.FC = () => {
                 </div>
                 {rev.framePurchased && (
                   <div className="text-[11px] text-teal-900 dark:text-teal-400 font-medium pt-0.5">
-                    Frame: {rev.framePurchased}
+                    Bingkai: {rev.framePurchased}
                   </div>
                 )}
               </div>
@@ -166,7 +166,7 @@ export const ReviewsSection: React.FC = () => {
             <div className="bg-white dark:bg-stone-900 w-full max-w-lg rounded-2xl p-6 shadow-2xl border border-stone-200 dark:border-stone-800 space-y-4">
               <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-3">
                 <h3 id="write-review-title" className="text-base font-serif font-semibold text-stone-900 dark:text-stone-100">
-                  Share Your Lumina Experience
+                  Tulis Ulasan Anda di Krostell Optik
                 </h3>
                 <button
                   onClick={() => setIsWriteModalOpen(false)}
@@ -178,61 +178,61 @@ export const ReviewsSection: React.FC = () => {
 
               <form onSubmit={handleAddReview} className="space-y-4 text-xs">
                 <div>
-                  <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Your Name *</label>
+                  <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Nama Lengkap *</label>
                   <input
                     type="text"
                     required
                     value={authorName}
                     onChange={(e) => setAuthorName(e.target.value)}
-                    placeholder="e.g. Sarah Jenkins"
+                    placeholder="Contoh: Sarah Jenkins"
                     className="w-full p-2 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Rating</label>
+                    <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Penilaian</label>
                     <select
                       value={rating}
                       onChange={(e) => setRating(Number(e.target.value))}
                       className="w-full p-2 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none cursor-pointer"
                     >
-                      <option value={5}>5 Stars - Exceptional</option>
-                      <option value={4}>4 Stars - Great Experience</option>
-                      <option value={3}>3 Stars - Average</option>
+                      <option value={5}>5 Bintang - Luar Biasa</option>
+                      <option value={4}>4 Bintang - Sangat Bagus</option>
+                      <option value={3}>3 Bintang - Cukup</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Your City / Area</label>
+                    <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Kota / Domisili</label>
                     <input
                       type="text"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                      placeholder="e.g. Willow Glen, San Jose"
+                      placeholder="Contoh: Jakarta Selatan"
                       className="w-full p-2 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Service / Frame</label>
+                  <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Layanan / Tipe Kacamata</label>
                   <input
                     type="text"
                     value={framePurchased}
                     onChange={(e) => setFramePurchased(e.target.value)}
-                    placeholder="e.g. Soren Acetate in Tortoise"
+                    placeholder="Contoh: Soren Acetate warna Tortoise"
                     className="w-full p-2 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Your Review *</label>
+                  <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">Ulasan Anda *</label>
                   <textarea
                     rows={4}
                     required
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Tell us about the exam, frame fit, prescription clarity, or customer service..."
+                    placeholder="Ceritakan pengalaman Anda mengenai pemeriksaan mata, kenyamanan bingkai, ketajaman resep, atau keramahan optisi kami..."
                     className="w-full p-2 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                   />
                 </div>
@@ -243,13 +243,13 @@ export const ReviewsSection: React.FC = () => {
                     onClick={() => setIsWriteModalOpen(false)}
                     className="px-4 py-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 cursor-pointer"
                   >
-                    Cancel
+                    Batal
                   </button>
                   <button
                     type="submit"
                     className="px-5 py-2 font-semibold text-white bg-teal-900 hover:bg-teal-950 dark:bg-teal-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                   >
-                    Publish Review
+                    Kirim Ulasan
                   </button>
                 </div>
               </form>

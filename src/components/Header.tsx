@@ -23,11 +23,11 @@ export const Header: React.FC<HeaderProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { id: 'collection', label: 'Eyewear Collection' },
-    { id: 'lens-guide', label: 'Lens Technology' },
-    { id: 'exams', label: 'Eye Exams & Care' },
-    { id: 'clinic', label: 'Our Clinic' },
-    { id: 'journal', label: 'Vision Journal' },
+    { id: 'collection', label: 'Koleksi Bingkai' },
+    { id: 'lens-guide', label: 'Teknologi Lensa' },
+    { id: 'exams', label: 'Pemeriksaan Mata' },
+    { id: 'clinic', label: 'Klinik & Lokasi' },
+    { id: 'journal', label: 'Jurnal Mata' },
   ];
 
   const handleLinkClick = (id: string) => {
@@ -49,9 +49,9 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2.5 text-xl sm:text-2xl font-serif tracking-tight text-stone-900 dark:text-stone-100 whitespace-nowrap shrink-0 hover:text-teal-900 dark:hover:text-teal-400 transition-colors"
           >
             <span className="w-8 h-8 rounded-full bg-teal-900 dark:bg-teal-700 text-stone-100 flex items-center justify-center font-serif text-base font-semibold shadow-xs">
-              L
+              K
             </span>
-            <span>Lumina Optical</span>
+            <span>Krostell Optik</span>
           </a>
 
           {/* Zone 2: 4-5 concise single-line nav links */}
@@ -60,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 key={link.id}
                 onClick={() => handleLinkClick(link.id)}
-                className={`whitespace-nowrap shrink-0 transition-colors py-1 relative ${
+                className={`whitespace-nowrap shrink-0 transition-colors py-1 relative cursor-pointer ${
                   activeSection === link.id
                     ? 'text-stone-900 dark:text-white font-semibold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-teal-800 dark:after:bg-teal-400'
                     : 'hover:text-stone-900 dark:hover:text-white'
@@ -76,8 +76,8 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Dark Mode Toggle */}
             <button
               onClick={onToggleDarkMode}
-              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label={isDarkMode ? 'Beralih ke mode terang' : 'Beralih ke mode gelap'}
+              title={isDarkMode ? 'Beralih ke mode terang' : 'Beralih ke mode gelap'}
               className="p-2 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200/60 dark:hover:bg-stone-800 rounded-lg transition-colors cursor-pointer"
             >
               {isDarkMode ? (
@@ -90,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Bag Button */}
             <button
               onClick={onOpenCart}
-              aria-label={`Shopping bag with ${cartItemCount} items`}
+              aria-label={`Keranjang belanja dengan ${cartItemCount} item`}
               className="relative p-2 text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-stone-800 rounded-lg transition-colors cursor-pointer"
             >
               <ShoppingBag className="w-5 h-5" />
@@ -107,14 +107,14 @@ export const Header: React.FC<HeaderProps> = ({
               className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 rounded-lg hover:bg-teal-900 dark:hover:bg-teal-700 active:scale-[0.98] transition-all whitespace-nowrap shrink-0 shadow-xs cursor-pointer"
             >
               <Calendar className="w-3.5 h-3.5 text-teal-300" />
-              <span>Book Exam</span>
+              <span>Pesan Jadwal Periksa</span>
             </button>
 
             {/* Mobile Hamburger Menu */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white rounded-lg"
-              aria-label="Toggle navigation menu"
+              className="md:hidden p-2 text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white rounded-lg cursor-pointer"
+              aria-label="Buka menu navigasi"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -130,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 key={link.id}
                 onClick={() => handleLinkClick(link.id)}
-                className="text-left py-2 px-3 text-sm font-medium rounded-md text-stone-700 dark:text-stone-200 hover:bg-stone-200/60 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white"
+                className="text-left py-2 px-3 text-sm font-medium rounded-md text-stone-700 dark:text-stone-200 hover:bg-stone-200/60 dark:hover:bg-stone-800 hover:text-stone-900 dark:hover:text-white cursor-pointer"
               >
                 {link.label}
               </button>
@@ -142,10 +142,10 @@ export const Header: React.FC<HeaderProps> = ({
                 setMobileMenuOpen(false);
                 onOpenBooking();
               }}
-              className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 rounded-lg hover:bg-teal-900 dark:hover:bg-teal-700"
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 rounded-lg hover:bg-teal-900 dark:hover:bg-teal-700 cursor-pointer"
             >
               <Calendar className="w-4 h-4 text-teal-300" />
-              <span>Book Eye Exam & Fitting</span>
+              <span>Pesan Jadwal Periksa & Fitting</span>
             </button>
           </div>
         </div>

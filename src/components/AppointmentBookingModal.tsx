@@ -4,6 +4,7 @@ import {
   CLINIC_SERVICES,
   ACCEPTED_INSURANCES,
   CLINIC_INFO,
+  formatRupiah,
 } from '../data/mockOpticalData';
 import {
   X,
@@ -35,12 +36,12 @@ export const AppointmentBookingModal: React.FC<AppointmentBookingModalProps> = (
   );
   const [selectedDoctorId, setSelectedDoctorId] = useState<string>('any');
   const [selectedDate, setSelectedDate] = useState<string>('2026-10-15');
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('10:15 AM');
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>('10:15 WIB');
 
   const [patientName, setPatientName] = useState('');
   const [patientEmail, setPatientEmail] = useState('');
   const [patientPhone, setPatientPhone] = useState('');
-  const [insurance, setInsurance] = useState('VSP (Vision Service Plan)');
+  const [insurance, setInsurance] = useState('BPJS Kesehatan');
   const [symptomsNote, setSymptomsNote] = useState('');
 
   // Generated confirmation
@@ -50,23 +51,23 @@ export const AppointmentBookingModal: React.FC<AppointmentBookingModalProps> = (
     CLINIC_SERVICES.find((s) => s.id === selectedServiceId) || CLINIC_SERVICES[0];
 
   const availableDates = [
-    { date: '2026-10-15', label: 'Thu, Oct 15' },
-    { date: '2026-10-16', label: 'Fri, Oct 16' },
-    { date: '2026-10-17', label: 'Sat, Oct 17' },
-    { date: '2026-10-19', label: 'Mon, Oct 19' },
-    { date: '2026-10-20', label: 'Tue, Oct 20' },
-    { date: '2026-10-21', label: 'Wed, Oct 21' },
+    { date: '2026-10-15', label: 'Kam, 15 Okt' },
+    { date: '2026-10-16', label: 'Jum, 16 Okt' },
+    { date: '2026-10-17', label: 'Sab, 17 Okt' },
+    { date: '2026-10-19', label: 'Sen, 19 Okt' },
+    { date: '2026-10-20', label: 'Sel, 20 Okt' },
+    { date: '2026-10-21', label: 'Rab, 21 Okt' },
   ];
 
   const timeSlots = [
-    '09:15 AM',
-    '10:15 AM',
-    '11:30 AM',
-    '01:45 PM',
-    '02:30 PM',
-    '03:45 PM',
-    '04:30 PM',
-    '05:15 PM',
+    '09:15 WIB',
+    '10:15 WIB',
+    '11:30 WIB',
+    '13:45 WIB',
+    '14:30 WIB',
+    '15:45 WIB',
+    '16:30 WIB',
+    '17:15 WIB',
   ];
 
   const handleConfirmBooking = (e: React.FormEvent) => {
@@ -74,7 +75,7 @@ export const AppointmentBookingModal: React.FC<AppointmentBookingModalProps> = (
     if (!patientName.trim() || !patientEmail.trim() || !patientPhone.trim()) {
       return;
     }
-    const generatedRef = `LUM-${Math.floor(100000 + Math.random() * 900000)}`;
+    const generatedRef = `KROS-${Math.floor(100000 + Math.random() * 900000)}`;
     setBookingRef(generatedRef);
     setStep('confirmed');
   };
@@ -82,14 +83,14 @@ export const AppointmentBookingModal: React.FC<AppointmentBookingModalProps> = (
   const handleDownloadIcs = () => {
     const calendarContent = `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Lumina Optical//Appointment Scheduler//EN
+PRODID:-//Krostell Optik//Jadwal Pemeriksaan Mata//ID
 BEGIN:VEVENT
-UID:${bookingRef}@luminaoptical.com
+UID:${bookingRef}@krostell.com
 DTSTAMP:20261012T000000Z
 DTSTART:20261015T101500
 DTEND:20261015T110000
-SUMMARY:Lumina Optical Eye Exam: ${currentService.title}
-DESCRIPTION:Ref: ${bookingRef}\\nPatient: ${patientName}\\nLocation: ${CLINIC_INFO.address}, ${CLINIC_INFO.cityStateZip}\\nPhone: ${CLINIC_INFO.phone}
+SUMMARY:Pemeriksaan Mata Krostell Optik: ${currentService.title}
+DESCRIPTION:Ref: ${bookingRef}\\nPasien: ${patientName}\\nLokasi: ${CLINIC_INFO.address}, ${CLINIC_INFO.cityStateZip}\\nTelepon: ${CLINIC_INFO.phone}
 LOCATION:${CLINIC_INFO.address}, ${CLINIC_INFO.cityStateZip}
 STATUS:CONFIRMED
 END:VEVENT
@@ -99,7 +100,7 @@ END:VCALENDAR`;
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `lumina-appointment-${bookingRef}.ics`);
+    link.setAttribute('download', `krostell-jadwal-${bookingRef}.ics`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -118,7 +119,7 @@ END:VCALENDAR`;
           <div className="flex items-center gap-2.5">
             <Calendar className="w-5 h-5 text-teal-800 dark:text-teal-400" />
             <h2 id="booking-modal-title" className="text-lg font-serif font-semibold text-stone-900 dark:text-stone-100">
-              Schedule Clinic Visit
+              Jadwal Kunjungan Klinik
             </h2>
           </div>
           <button
@@ -139,7 +140,7 @@ END:VCALENDAR`;
                   : 'border-transparent'
               }`}
             >
-              1. Choose Service
+              1. Pilih Layanan
             </div>
             <div
               className={`py-2 px-3 text-center border-b-2 ${
@@ -148,7 +149,7 @@ END:VCALENDAR`;
                   : 'border-transparent'
               }`}
             >
-              2. Doctor & Time
+              2. Dokter & Waktu
             </div>
             <div
               className={`py-2 px-3 text-center border-b-2 ${
@@ -157,7 +158,7 @@ END:VCALENDAR`;
                   : 'border-transparent'
               }`}
             >
-              3. Patient Details
+              3. Data Pasien
             </div>
           </div>
         )}
@@ -168,10 +169,10 @@ END:VCALENDAR`;
             <div className="space-y-4">
               <div className="space-y-1">
                 <h3 className="text-base font-serif font-semibold text-stone-900 dark:text-stone-100">
-                  Select Examination or Fitting Service
+                  Pilih Layanan Pemeriksaan atau Fitting
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400">
-                  All comprehensive clinical exams include digital retinal screening and glaucoma testing.
+                  Seluruh pemeriksaan klinis komprehensif mencakup skrining retina digital resolusi ultra-tinggi dan evaluasi tekanan bola mata (glaukoma).
                 </p>
               </div>
 
@@ -194,15 +195,15 @@ END:VCALENDAR`;
                         <div className="text-stone-500 dark:text-stone-400 mt-0.5 flex items-center gap-2">
                           <span>{srv.duration}</span>
                           <span aria-hidden="true">·</span>
-                          <span>{srv.coveredByInsurance ? 'Vision Insurance Eligible' : 'Complimentary'}</span>
+                          <span>{srv.coveredByInsurance ? 'Ditanggung Asuransi' : 'Gratis / Termasuk'}</span>
                         </div>
                       </div>
                       <div className="text-right">
                         <span className="text-sm font-bold text-stone-900 dark:text-stone-100 tabular-nums">
-                          {srv.price === 0 ? 'Free' : `$${srv.price}`}
+                          {srv.price === 0 ? 'Gratis' : formatRupiah(srv.price)}
                         </span>
                         {srv.coveredByInsurance && (
-                          <span className="text-[10px] text-stone-400 block">or Copay</span>
+                          <span className="text-[10px] text-stone-400 block">Klaim Asuransi</span>
                         )}
                       </div>
                     </div>
@@ -216,7 +217,7 @@ END:VCALENDAR`;
                   onClick={() => setStep('doctor-time')}
                   className="px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                 >
-                  Continue to Doctor & Date →
+                  Lanjut ke Dokter & Jadwal →
                 </button>
               </div>
             </div>
@@ -227,7 +228,7 @@ END:VCALENDAR`;
               {/* Doctor Preference */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200">
-                  Choose Optometrist:
+                  Pilih Dokter Spesialis Mata:
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                   <button
@@ -239,8 +240,8 @@ END:VCALENDAR`;
                         : 'border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800'
                     }`}
                   >
-                    <div>First Available</div>
-                    <span className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">Fastest opening</span>
+                    <div>Pertama Tersedia</div>
+                    <span className="text-[10px] text-stone-500 dark:text-stone-400 font-normal">Jadwal tercepat</span>
                   </button>
 
                   {CLINIC_DOCTORS.map((doc) => (
@@ -266,7 +267,7 @@ END:VCALENDAR`;
               {/* Date Selection */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200">
-                  Select Date:
+                  Pilih Tanggal:
                 </label>
                 <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 text-xs">
                   {availableDates.map((item) => (
@@ -290,7 +291,7 @@ END:VCALENDAR`;
               {/* Time Slots */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200">
-                  Select Time Slot:
+                  Pilih Jam Kunjungan:
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                   {timeSlots.map((slot) => (
@@ -315,13 +316,13 @@ END:VCALENDAR`;
                   onClick={() => setStep('service')}
                   className="px-4 py-2 text-xs font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 cursor-pointer"
                 >
-                  ← Back to Service
+                  ← Kembali ke Layanan
                 </button>
                 <button
                   onClick={() => setStep('patient')}
                   className="px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                 >
-                  Continue to Patient Details →
+                  Lanjut ke Data Pasien →
                 </button>
               </div>
             </div>
@@ -331,45 +332,45 @@ END:VCALENDAR`;
             <form onSubmit={handleConfirmBooking} className="space-y-5">
               <div className="space-y-1">
                 <h3 className="text-base font-serif font-semibold text-stone-900 dark:text-stone-100">
-                  Patient Contact & Insurance Information
+                  Kontak Pasien & Informasi Asuransi
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400">
-                  We bill your vision benefits directly. Bring your vision insurance card or member ID.
+                  Kami melayani penagihan klaim asuransi kesehatan langsung. Harap bawa kartu fisik asuransi atau nomor keanggotaan Anda saat hadir.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 <div>
                   <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">
-                    Full Name *
+                    Nama Lengkap *
                   </label>
                   <input
                     type="text"
                     required
                     value={patientName}
                     onChange={(e) => setPatientName(e.target.value)}
-                    placeholder="e.g. Marcus Thorne"
+                    placeholder="contoh: Marcus Thorne"
                     className="w-full p-2.5 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">
-                    Phone Number *
+                    Nomor WhatsApp / Telepon *
                   </label>
                   <input
                     type="tel"
                     required
                     value={patientPhone}
                     onChange={(e) => setPatientPhone(e.target.value)}
-                    placeholder="(408) 555-0123"
+                    placeholder="0812-3456-7890"
                     className="w-full p-2.5 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
                   <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">
-                    Email Address (for appointment confirmation & reminders) *
+                    Alamat Email (untuk konfirmasi & pengingat jadwal) *
                   </label>
                   <input
                     type="email"
@@ -383,7 +384,7 @@ END:VCALENDAR`;
 
                 <div className="sm:col-span-2">
                   <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">
-                    Vision Insurance / Payment Plan
+                    Asuransi Kesehatan / Skema Pembayaran
                   </label>
                   <select
                     value={insurance}
@@ -395,19 +396,19 @@ END:VCALENDAR`;
                         {ins}
                       </option>
                     ))}
-                    <option value="Self-Pay / Private">Self-Pay / Private Consultation</option>
+                    <option value="Self-Pay / Private">Pembayaran Mandiri / Pribadi</option>
                   </select>
                 </div>
 
                 <div className="sm:col-span-2">
                   <label className="block text-stone-700 dark:text-stone-300 font-medium mb-1">
-                    Reason for visit or symptoms (optional)
+                    Keluhan mata atau alasan kunjungan (opsional)
                   </label>
                   <textarea
                     rows={2}
                     value={symptomsNote}
                     onChange={(e) => setSymptomsNote(e.target.value)}
-                    placeholder="e.g., Routine exam, blurry distance vision, frequent digital eye strain, interested in new progressive glasses..."
+                    placeholder="contoh: Pemeriksaan rutin berkala, mata sering buram & cepat perih depan laptop, ingin konsultasi lensa progresif..."
                     className="w-full p-2.5 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                   />
                 </div>
@@ -418,11 +419,11 @@ END:VCALENDAR`;
                 <div>
                   <span className="font-semibold text-stone-800 dark:text-stone-200">{currentService.title}</span>
                   <div className="text-[11px] text-stone-500 dark:text-stone-400">
-                    {selectedDate} at {selectedTimeSlot} · Lumina Optical Willow Glen
+                    {selectedDate} pukul {selectedTimeSlot} · Butik Klinik Krostell Optik Senopati
                   </div>
                 </div>
                 <div className="font-bold text-stone-900 dark:text-stone-100 tabular-nums">
-                  {currentService.price === 0 ? 'Free' : `$${currentService.price}`}
+                  {currentService.price === 0 ? 'Gratis' : formatRupiah(currentService.price)}
                 </div>
               </div>
 
@@ -432,13 +433,13 @@ END:VCALENDAR`;
                   onClick={() => setStep('doctor-time')}
                   className="px-4 py-2 text-xs font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 cursor-pointer"
                 >
-                  ← Back
+                  ← Kembali
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2.5 text-xs font-semibold text-white bg-teal-900 hover:bg-teal-950 dark:bg-teal-700 dark:hover:bg-teal-600 rounded-lg cursor-pointer shadow-xs"
                 >
-                  Confirm Appointment
+                  Konfirmasi Jadwal Kunjungan
                 </button>
               </div>
             </form>
@@ -452,13 +453,13 @@ END:VCALENDAR`;
 
               <div className="space-y-1">
                 <span className="text-xs font-mono font-bold text-teal-800 dark:text-teal-400">
-                  BOOKING CONFIRMATION #{bookingRef}
+                  KONFIRMASI JADWAL #{bookingRef}
                 </span>
                 <h3 className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">
-                  Your appointment is confirmed!
+                  Jadwal kunjungan Anda telah terkonfirmasi!
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 max-w-md mx-auto">
-                  A calendar invite and preparation details have been sent to{' '}
+                  Undangan kalender dan panduan persiapan pemeriksaan telah dikirim ke{' '}
                   <strong className="text-stone-800 dark:text-stone-200">{patientEmail}</strong>.
                 </p>
               </div>
@@ -466,31 +467,31 @@ END:VCALENDAR`;
               {/* Card Summary */}
               <div className="max-w-md mx-auto bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-xl p-5 text-left text-xs space-y-2.5">
                 <div className="flex justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
-                  <span className="text-stone-500 dark:text-stone-400">Service:</span>
+                  <span className="text-stone-500 dark:text-stone-400">Layanan:</span>
                   <span className="font-semibold text-stone-900 dark:text-stone-100">{currentService.title}</span>
                 </div>
                 <div className="flex justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
-                  <span className="text-stone-500 dark:text-stone-400">Date & Time:</span>
+                  <span className="text-stone-500 dark:text-stone-400">Tanggal & Jam:</span>
                   <span className="font-semibold text-stone-900 dark:text-stone-100">
                     {selectedDate} · {selectedTimeSlot}
                   </span>
                 </div>
                 <div className="flex justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
-                  <span className="text-stone-500 dark:text-stone-400">Optometrist:</span>
+                  <span className="text-stone-500 dark:text-stone-400">Dokter Pemeriksa:</span>
                   <span className="font-semibold text-stone-900 dark:text-stone-100">
                     {selectedDoctorId === 'any'
-                      ? 'Lumina Clinical Staff'
+                      ? 'Tim Medis Krostell Optik'
                       : CLINIC_DOCTORS.find((d) => d.id === selectedDoctorId)?.name}
                   </span>
                 </div>
                 <div className="flex justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
-                  <span className="text-stone-500 dark:text-stone-400">Patient:</span>
+                  <span className="text-stone-500 dark:text-stone-400">Nama Pasien:</span>
                   <span className="font-semibold text-stone-900 dark:text-stone-100">{patientName}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-stone-500 dark:text-stone-400">Clinic Address:</span>
+                  <span className="text-stone-500 dark:text-stone-400">Lokasi Butik Klinik:</span>
                   <span className="font-semibold text-stone-900 dark:text-stone-100 text-right">
-                    {CLINIC_INFO.address}, Willow Glen
+                    {CLINIC_INFO.address}, Senopati
                   </span>
                 </div>
               </div>
@@ -499,12 +500,12 @@ END:VCALENDAR`;
               <div className="max-w-md mx-auto p-4 bg-teal-50/60 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 rounded-xl text-left text-xs text-teal-950 dark:text-teal-200 space-y-1">
                 <p className="font-bold flex items-center gap-1.5">
                   <FileCheck className="w-4 h-4 text-teal-800 dark:text-teal-400" />
-                  What to bring to your visit:
+                  Yang perlu dibawa saat kunjungan:
                 </p>
                 <ul className="list-disc pl-5 space-y-0.5 text-stone-600 dark:text-stone-400 text-[11px]">
-                  <li>Current glasses and sunglasses</li>
-                  <li>Vision insurance card (if applicable)</li>
-                  <li>Contact lens boxes (if getting a contact lens refit)</li>
+                  <li>Kacamata atau kacamata hitam yang sedang Anda gunakan</li>
+                  <li>Kartu fisik atau digital asuransi kesehatan (jika menggunakan asuransi)</li>
+                  <li>Kemasan lensa kontak Anda (jika menjadwalkan evaluasi lensa kontak)</li>
                 </ul>
               </div>
 
@@ -515,13 +516,13 @@ END:VCALENDAR`;
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-semibold text-stone-900 dark:text-stone-200 bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700 rounded-lg cursor-pointer"
                 >
                   <Download className="w-4 h-4 text-teal-800 dark:text-teal-400" />
-                  <span>Download .ICS Calendar Event</span>
+                  <span>Unduh Acara Kalender (.ICS)</span>
                 </button>
                 <button
                   onClick={onClose}
                   className="w-full sm:w-auto px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                 >
-                  Done
+                  Selesai
                 </button>
               </div>
             </div>

@@ -34,7 +34,7 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
           <div className="flex items-center gap-2">
             <Ruler className="w-5 h-5 text-teal-800 dark:text-teal-400" />
             <h2 id="pd-modal-title" className="text-base font-serif font-semibold text-stone-900 dark:text-stone-100">
-              How to Measure Your Pupillary Distance (PD)
+              Cara Mengukur Jarak Pupil (Pupillary Distance / PD)
             </h2>
           </div>
           <button
@@ -48,17 +48,17 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
         {/* Content */}
         <div className="overflow-y-auto p-6 space-y-6 text-xs text-stone-700 dark:text-stone-300 flex-1">
           <div className="p-4 bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 rounded-xl space-y-1">
-            <p className="font-semibold text-teal-900 dark:text-teal-200">What is Pupillary Distance?</p>
+            <p className="font-semibold text-teal-900 dark:text-teal-200">Apa itu Jarak Pupil (PD)?</p>
             <p className="text-stone-600 dark:text-stone-300 leading-relaxed">
-              Your PD is the distance in millimeters between the centers of your two pupils. 
-              It guarantees that the optical center of each lens aligns perfectly with your visual axis, eliminating strain and distortion.
+              PD adalah jarak dalam milimeter antara titik tengah kedua pupil mata Anda. 
+              Pengukuran ini memastikan titik fokus optik lensa berada tepat sejajar di depan mata Anda, mencegah rasa pusing dan mata lelah.
             </p>
           </div>
 
           {/* 3 Step Guide */}
           <div className="space-y-4">
             <h3 className="font-serif font-bold text-sm text-stone-900 dark:text-stone-100">
-              3-Step Mirror & Ruler Method:
+              3 Langkah Mengukur Sendiri di Cermin:
             </h3>
 
             <div className="space-y-3">
@@ -67,9 +67,9 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
                   1
                 </span>
                 <div>
-                  <strong className="block text-stone-900 dark:text-stone-100">Stand 8 inches in front of a mirror</strong>
+                  <strong className="block text-stone-900 dark:text-stone-100">Berdiri sekitar 20 cm di depan cermin</strong>
                   <span className="text-stone-600 dark:text-stone-400">
-                    Hold a standard millimeter ruler flat against your browbone.
+                    Pegang penggaris milimeter lurus menempel tepat di atas pangkal hidung/tulang alis Anda.
                   </span>
                 </div>
               </div>
@@ -79,9 +79,9 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
                   2
                 </span>
                 <div>
-                  <strong className="block text-stone-900 dark:text-stone-100">Align 0mm with your right pupil center</strong>
+                  <strong className="block text-stone-900 dark:text-stone-100">Posisikan angka 0 mm di tengah pupil kanan</strong>
                   <span className="text-stone-600 dark:text-stone-400">
-                    Close your left eye, look straight ahead into the mirror, and slide the 0mm mark over your right pupil center.
+                    Tutup mata kiri, pandang lurus ke cermin, lalu geser garis angka 0 tepat di tengah lingkaran hitam mata kanan Anda.
                   </span>
                 </div>
               </div>
@@ -91,9 +91,9 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
                   3
                 </span>
                 <div>
-                  <strong className="block text-stone-900 dark:text-stone-100">Read the millimeter mark on your left pupil</strong>
+                  <strong className="block text-stone-900 dark:text-stone-100">Baca angka milimeter di tengah pupil kiri</strong>
                   <span className="text-stone-600 dark:text-stone-400">
-                    Open your left eye and close your right. Note the number directly over your left pupil. That is your PD!
+                    Buka mata kiri dan tutup mata kanan. Angka yang tepat berada di tengah pupil mata kiri adalah ukuran PD Anda!
                   </span>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
           {/* Interactive PD Calibrator */}
           <div className="p-4 bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-xl space-y-3">
             <label className="block font-semibold text-stone-900 dark:text-stone-100">
-              Select or test your measurement:
+              Pilih atau atur perkiraan ukuran PD Anda:
             </label>
             <div className="flex items-center gap-4">
               <input
@@ -122,22 +122,22 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
             {/* Typical ranges */}
             <div className="grid grid-cols-3 gap-2 text-[11px] text-stone-500 dark:text-stone-400 pt-1 text-center">
               <div className="bg-white dark:bg-stone-900 p-2 rounded border border-stone-200 dark:border-stone-800">
-                <span className="block text-stone-400">Women Average</span>
+                <span className="block text-stone-400">Rata-rata Wanita</span>
                 <strong className="text-stone-800 dark:text-stone-200">62 mm</strong>
               </div>
               <div className="bg-white dark:bg-stone-900 p-2 rounded border border-stone-200 dark:border-stone-800">
-                <span className="block text-stone-400">Men Average</span>
+                <span className="block text-stone-400">Rata-rata Pria</span>
                 <strong className="text-stone-800 dark:text-stone-200">64 mm</strong>
               </div>
               <div className="bg-white dark:bg-stone-900 p-2 rounded border border-stone-200 dark:border-stone-800">
-                <span className="block text-stone-400">Adult Range</span>
+                <span className="block text-stone-400">Rentang Dewasa</span>
                 <strong className="text-stone-800 dark:text-stone-200">58–68 mm</strong>
               </div>
             </div>
           </div>
 
           <p className="text-[11px] text-stone-500 dark:text-stone-400 italic">
-            *Need an exact measurement? Visit Lumina Optical clinic in Willow Glen anytime for a free 60-second digital pupillometer scan.
+            *Ingin hasil akurat digital? Anda bisa berkunjung ke butik Krostell Optik Senopati kapan saja untuk pemindaian pupillometer digital gratis dalam 60 detik.
           </p>
         </div>
 
@@ -147,13 +147,13 @@ export const PdMeasureToolModal: React.FC<PdMeasureToolModalProps> = ({
             onClick={onClose}
             className="text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 text-xs font-medium cursor-pointer"
           >
-            Close Guide
+            Tutup Panduan
           </button>
           <button
             onClick={handleApply}
             className="px-5 py-2 text-xs font-semibold text-white bg-teal-900 dark:bg-teal-700 hover:bg-teal-950 dark:hover:bg-teal-600 rounded-lg cursor-pointer"
           >
-            Use {testPd} mm for My Lenses
+            Gunakan {testPd} mm untuk Lensa Saya
           </button>
         </div>
       </div>

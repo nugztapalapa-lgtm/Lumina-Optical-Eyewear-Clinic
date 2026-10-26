@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CartItem } from '../types/optical';
-import { ACCEPTED_INSURANCES } from '../data/mockOpticalData';
+import { ACCEPTED_INSURANCES, formatRupiah } from '../data/mockOpticalData';
 import {
   X,
   ShieldCheck,
@@ -35,18 +35,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [deliveryMethod, setDeliveryMethod] = useState<'ship' | 'pickup'>('ship');
 
   // Customer Form
-  const [fullName, setFullName] = useState('Jane Foster');
-  const [email, setEmail] = useState('jane.foster@example.com');
-  const [phone, setPhone] = useState('(408) 555-0144');
-  const [address, setAddress] = useState('1420 Lincoln Ave');
-  const [city, setCity] = useState('San Jose');
-  const [state, setState] = useState('CA');
-  const [zip, setZip] = useState('95125');
+  const [fullName, setFullName] = useState('Budi Pratama');
+  const [email, setEmail] = useState('budi.pratama@example.com');
+  const [phone, setPhone] = useState('0812-3456-7890');
+  const [address, setAddress] = useState('Jl. Senopati No. 88, Kebayoran Baru');
+  const [city, setCity] = useState('Jakarta Selatan');
+  const [state, setState] = useState('DKI Jakarta');
+  const [zip, setZip] = useState('12190');
 
   // Insurance Reimbursement
   const [claimInsurance, setClaimInsurance] = useState(true);
-  const [insurancePlan, setInsurancePlan] = useState('VSP (Vision Service Plan)');
-  const [memberId, setMemberId] = useState('VSP-9821408');
+  const [insurancePlan, setInsurancePlan] = useState('BPJS Kesehatan');
+  const [memberId, setMemberId] = useState('BPJS-9821408');
 
   // Payment Form
   const [cardNumber, setCardNumber] = useState('4242 •••• •••• 4242');
@@ -58,12 +58,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   // Math
   const rawSubtotal = items.reduce((sum, item) => sum + item.totalPrice * item.quantity, 0);
-  const discountAmount = appliedPromo.toUpperCase() === 'AUTUMN26' ? 25 : 0;
+  const discountAmount = appliedPromo.toUpperCase() === 'KROSTELL26' ? 250000 : 0;
   const grandTotal = Math.max(0, rawSubtotal - discountAmount);
 
   const handlePlaceOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    const newOrderId = `ORD-${Math.floor(100000 + Math.random() * 900000)}`;
+    const newOrderId = `KROS-${Math.floor(100000 + Math.random() * 900000)}`;
     setOrderId(newOrderId);
     setStep('completed');
     onOrderSuccess();
@@ -86,7 +86,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           <div className="flex items-center gap-2.5">
             <ShieldCheck className="w-5 h-5 text-teal-800 dark:text-teal-400" />
             <h2 id="checkout-modal-title" className="text-base font-serif font-semibold text-stone-900 dark:text-stone-100">
-              Secure Optical Checkout
+              Pembayaran Aman Krostell Optik
             </h2>
           </div>
           <button
@@ -107,7 +107,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   : 'border-transparent'
               }`}
             >
-              1. Delivery & Address
+              1. Pengiriman & Alamat
             </div>
             <div
               className={`py-2 px-3 text-center border-b-2 ${
@@ -116,7 +116,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   : 'border-transparent'
               }`}
             >
-              2. Vision Benefits & FSA
+              2. Asuransi & Reimbursement
             </div>
             <div
               className={`py-2 px-3 text-center border-b-2 ${
@@ -125,7 +125,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   : 'border-transparent'
               }`}
             >
-              3. Payment & Submit
+              3. Pembayaran & Selesai
             </div>
           </div>
         )}
@@ -136,9 +136,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <div className="space-y-5 text-xs">
               <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-3">
                 <h3 className="font-serif font-semibold text-stone-900 dark:text-stone-100 text-sm">
-                  Select Delivery Preference
+                  Pilih Metode Pengiriman & Penerimaan
                 </h3>
-                <span className="text-stone-500 dark:text-stone-400">Free standard shipping on all prescription orders</span>
+                <span className="text-stone-500 dark:text-stone-400">Gratis ongkos kirim ke seluruh Indonesia</span>
               </div>
 
               {/* Delivery method toggles */}
@@ -154,10 +154,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 >
                   <div className="flex items-center gap-2 font-semibold text-stone-900 dark:text-stone-100">
                     <Truck className="w-4 h-4 text-teal-800 dark:text-teal-400" />
-                    <span>Free Home Delivery</span>
+                    <span>Pengiriman Gratis ke Rumah</span>
                   </div>
                   <p className="text-[11px] text-stone-500 dark:text-stone-400 mt-1">
-                    Delivered in 4–6 business days after doctor verification
+                    Dikirim dalam 3–5 hari kerja setelah verifikasi resep dokter spesialis mata
                   </p>
                 </button>
 
@@ -172,20 +172,20 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 >
                   <div className="flex items-center gap-2 font-semibold text-stone-900 dark:text-stone-100">
                     <Building className="w-4 h-4 text-teal-800 dark:text-teal-400" />
-                    <span>Clinic Pickup & Custom Fitting</span>
+                    <span>Ambil di Butik Senopati & Fitting Gratis</span>
                   </div>
                   <p className="text-[11px] text-stone-500 dark:text-stone-400 mt-1">
-                    Ready in 2–3 days at 428 Birchwood Ave with free optician fitting
+                    Siap dalam 1–2 hari di Jl. Senopati No. 88 lengkap dengan fitting ahli refraksionis optisi
                   </p>
                 </button>
               </div>
 
               {/* Contact Info */}
               <div className="space-y-3 pt-2">
-                <h4 className="font-semibold text-stone-900 dark:text-stone-100">Contact & Recipient Details</h4>
+                <h4 className="font-semibold text-stone-900 dark:text-stone-100">Data Kontak & Penerima</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Full Name *</label>
+                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Nama Lengkap *</label>
                     <input
                       type="text"
                       value={fullName}
@@ -194,7 +194,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     />
                   </div>
                   <div>
-                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Phone Number *</label>
+                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Nomor WhatsApp / Telepon *</label>
                     <input
                       type="tel"
                       value={phone}
@@ -203,7 +203,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     />
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Email Address *</label>
+                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Alamat Email *</label>
                     <input
                       type="email"
                       value={email}
@@ -217,10 +217,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               {/* Address (if shipping) */}
               {deliveryMethod === 'ship' && (
                 <div className="space-y-3 pt-2">
-                  <h4 className="font-semibold text-stone-900 dark:text-stone-100">Shipping Street Address</h4>
+                  <h4 className="font-semibold text-stone-900 dark:text-stone-100">Alamat Pengiriman</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div className="sm:col-span-3">
-                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Street Address</label>
+                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Alamat Jalan & Nomor Rumah</label>
                       <input
                         type="text"
                         value={address}
@@ -229,7 +229,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-stone-600 dark:text-stone-400 mb-1">City</label>
+                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Kota / Kabupaten</label>
                       <input
                         type="text"
                         value={city}
@@ -238,7 +238,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-stone-600 dark:text-stone-400 mb-1">State</label>
+                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Provinsi</label>
                       <input
                         type="text"
                         value={state}
@@ -247,7 +247,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       />
                     </div>
                     <div>
-                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Postal Code</label>
+                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Kode Pos</label>
                       <input
                         type="text"
                         value={zip}
@@ -265,7 +265,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   onClick={() => setStep('insurance')}
                   className="px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                 >
-                  Continue to Insurance & FSA →
+                  Lanjut ke Klaim Asuransi →
                 </button>
               </div>
             </div>
@@ -275,10 +275,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <div className="space-y-5 text-xs">
               <div className="space-y-1">
                 <h3 className="font-serif font-semibold text-stone-900 dark:text-stone-100 text-sm">
-                  Vision Insurance Reimbursement & FSA / HSA
+                  Klaim Asuransi Kesehatan & Reimbursement Perusahaan
                 </h3>
                 <p className="text-stone-600 dark:text-stone-400">
-                  Prescription glasses qualify for tax-free FSA and HSA spending. We generate a standardized CMS itemized invoice with optical CPT diagnosis codes.
+                  Kacamata resep memenuhi syarat penggantian biaya kesehatan dan tunjangan kacamata optik. Kami menerbitkan kuitansi berstempel resmi dengan rincian diagnosis dan spesifikasi lensa lengkap.
                 </p>
               </div>
 
@@ -290,13 +290,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     onChange={(e) => setClaimInsurance(e.target.checked)}
                     className="rounded text-teal-800 focus:ring-teal-700"
                   />
-                  <span>Generate Itemized Insurance & FSA/HSA Reimbursement Claim Invoice</span>
+                  <span>Terbitkan Kuitansi & Formulir Resmi Klaim Reimbursement Asuransi</span>
                 </label>
 
                 {claimInsurance && (
                   <div className="space-y-3 pt-2 border-t border-stone-200 dark:border-stone-800">
                     <div>
-                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Vision Insurance Network</label>
+                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Penyedia / Rekanan Asuransi</label>
                       <select
                         value={insurancePlan}
                         onChange={(e) => setInsurancePlan(e.target.value)}
@@ -311,18 +311,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Member ID or Policy # (Optional)</label>
+                      <label className="block text-stone-600 dark:text-stone-400 mb-1">Nomor Polis / Kartu Peserta (Opsional)</label>
                       <input
                         type="text"
                         value={memberId}
                         onChange={(e) => setMemberId(e.target.value)}
-                        placeholder="e.g. VSP-9821408"
+                        placeholder="contoh: BPJS-9821408 atau MED-5501"
                         className="w-full p-2 border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-800 text-stone-900 dark:text-stone-100 rounded-lg focus:border-teal-700 focus:outline-none"
                       />
                     </div>
 
                     <p className="text-[11px] text-teal-900 dark:text-teal-400 font-medium">
-                      ✓ Our clinical billing department will cross-reference your out-of-network or in-network optical benefit allowance and mail/email your signed claim form.
+                      ✓ Bagian administrasi medis Krostell Optik akan menyertakan kuitansi resmi berstempel dan rincian lensa standar untuk kemudahan pengajuan klaim ke instansi atau perusahaan asuransi Anda.
                     </p>
                   </div>
                 )}
@@ -334,14 +334,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   onClick={() => setStep('shipping')}
                   className="px-4 py-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 cursor-pointer"
                 >
-                  ← Back to Delivery
+                  ← Kembali ke Pengiriman
                 </button>
                 <button
                   type="button"
                   onClick={() => setStep('payment')}
                   className="px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                 >
-                  Continue to Payment →
+                  Lanjut ke Pembayaran →
                 </button>
               </div>
             </div>
@@ -351,32 +351,32 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <form onSubmit={handlePlaceOrder} className="space-y-5 text-xs">
               <div className="space-y-1">
                 <h3 className="font-serif font-semibold text-stone-900 dark:text-stone-100 text-sm">
-                  Payment Method
+                  Metode Pembayaran
                 </h3>
                 <p className="text-stone-600 dark:text-stone-400">
-                  All transactions are encrypted with 256-bit SSL. FSA / HSA debit cards accepted.
+                  Semua transaksi dilindungi dengan enkripsi SSL 256-bit standar industri perbankan.
                 </p>
               </div>
 
               {/* Order total recap strip */}
               <div className="p-3 bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-xl space-y-1 text-stone-600 dark:text-stone-400">
                 <div className="flex justify-between">
-                  <span>Prescription Eyewear ({items.length} pairs)</span>
-                  <span className="font-semibold text-stone-900 dark:text-stone-100 tabular-nums">${rawSubtotal}</span>
+                  <span>Kacamata Resep ({items.length} pasang)</span>
+                  <span className="font-semibold text-stone-900 dark:text-stone-100 tabular-nums">{formatRupiah(rawSubtotal)}</span>
                 </div>
                 {discountAmount > 0 && (
                   <div className="flex justify-between text-emerald-700 dark:text-emerald-400">
-                    <span>Discount (AUTUMN26)</span>
-                    <span className="font-semibold tabular-nums">-${discountAmount}</span>
+                    <span>Potongan Diskon (KROSTELL26)</span>
+                    <span className="font-semibold tabular-nums">-{formatRupiah(discountAmount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between">
-                  <span>Shipping</span>
-                  <span className="font-semibold text-stone-900 dark:text-stone-100">Free</span>
+                  <span>Pengiriman</span>
+                  <span className="font-semibold text-stone-900 dark:text-stone-100">Gratis</span>
                 </div>
                 <div className="flex justify-between font-bold text-stone-900 dark:text-stone-100 text-sm pt-1 border-t border-stone-200 dark:border-stone-800">
-                  <span>Total Due Today</span>
-                  <span className="tabular-nums">${grandTotal}</span>
+                  <span>Total Pembayaran Hari Ini</span>
+                  <span className="tabular-nums">{formatRupiah(grandTotal)}</span>
                 </div>
               </div>
 
@@ -385,13 +385,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 font-semibold text-stone-800 dark:text-stone-200">
                     <CreditCard className="w-4 h-4 text-teal-800 dark:text-teal-400" />
-                    <span>Credit / Debit / FSA / HSA Card</span>
+                    <span>Kartu Kredit / Debit / Virtual Account</span>
                   </div>
-                  <span className="text-[10px] text-stone-400 dark:text-stone-500 font-mono">Encrypted</span>
+                  <span className="text-[10px] text-stone-400 dark:text-stone-500 font-mono">Terenkripsi</span>
                 </div>
 
                 <div>
-                  <label className="block text-stone-600 dark:text-stone-400 mb-1">Card Number</label>
+                  <label className="block text-stone-600 dark:text-stone-400 mb-1">Nomor Kartu / Virtual Account</label>
                   <input
                     type="text"
                     required
@@ -403,7 +403,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Expiration (MM/YY)</label>
+                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Masa Berlaku (BB/TT)</label>
                     <input
                       type="text"
                       required
@@ -413,7 +413,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     />
                   </div>
                   <div>
-                    <label className="block text-stone-600 dark:text-stone-400 mb-1">CVC Code</label>
+                    <label className="block text-stone-600 dark:text-stone-400 mb-1">Kode Keamanan CVV</label>
                     <input
                       type="text"
                       required
@@ -431,13 +431,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   onClick={() => setStep('insurance')}
                   className="px-4 py-2 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 cursor-pointer"
                 >
-                  ← Back
+                  ← Kembali
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2.5 text-xs font-semibold text-white bg-teal-900 hover:bg-teal-950 dark:bg-teal-700 dark:hover:bg-teal-600 rounded-lg cursor-pointer shadow-xs"
                 >
-                  Authorize Payment (${grandTotal})
+                  Otorisasi Pembayaran ({formatRupiah(grandTotal)})
                 </button>
               </div>
             </form>
@@ -451,13 +451,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               <div className="space-y-1">
                 <span className="text-xs font-mono font-bold text-teal-800 dark:text-teal-400">
-                  ORDER CONFIRMATION #{orderId}
+                  KONFIRMASI PESANAN #{orderId}
                 </span>
                 <h3 className="text-2xl font-serif font-bold text-stone-900 dark:text-stone-100">
-                  Thank you! Your order is being edged.
+                  Terima kasih! Pesanan Anda sedang diproses.
                 </h3>
                 <p className="text-xs text-stone-600 dark:text-stone-400 max-w-md mx-auto">
-                  A receipt and prescription verification update have been sent to{' '}
+                  Kuitansi dan konfirmasi pemotongan lensa berpresisi tinggi telah dikirimkan ke{' '}
                   <strong className="text-stone-800 dark:text-stone-200">{email}</strong>.
                 </p>
               </div>
@@ -465,34 +465,34 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               {/* Order Receipt Details */}
               <div className="max-w-md mx-auto bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-xl p-5 text-left text-xs space-y-3">
                 <div className="flex justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
-                  <span className="text-stone-500 dark:text-stone-400">Order Number:</span>
+                  <span className="text-stone-500 dark:text-stone-400">Nomor Pesanan:</span>
                   <span className="font-mono font-semibold text-stone-900 dark:text-stone-100">{orderId}</span>
                 </div>
 
                 <div className="space-y-1.5 border-b border-stone-200 dark:border-stone-800 pb-2">
-                  <span className="text-stone-500 dark:text-stone-400 block font-medium">Items Ordered:</span>
+                  <span className="text-stone-500 dark:text-stone-400 block font-medium">Item yang Dipesan:</span>
                   {items.map((i) => (
                     <div key={i.cartItemId} className="flex justify-between text-stone-800 dark:text-stone-200">
                       <span>
                         {i.quantity}x {i.product.name} ({i.selectedColor.name})
                       </span>
                       <span className="font-semibold tabular-nums">
-                        ${i.totalPrice * i.quantity}
+                        {formatRupiah(i.totalPrice * i.quantity)}
                       </span>
                     </div>
                   ))}
                 </div>
 
                 <div className="flex justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
-                  <span className="text-stone-500 dark:text-stone-400">Delivery Preference:</span>
+                  <span className="text-stone-500 dark:text-stone-400">Metode Penerimaan:</span>
                   <span className="font-semibold text-stone-900 dark:text-stone-100">
-                    {deliveryMethod === 'ship' ? `Ship to ${address}, ${city}` : 'Clinic Pickup at Willow Glen'}
+                    {deliveryMethod === 'ship' ? `Dikirim ke ${address}, ${city}` : 'Ambil di Butik Krostell Optik Senopati'}
                   </span>
                 </div>
 
                 <div className="flex justify-between text-stone-900 dark:text-stone-100 font-bold">
-                  <span>Paid Total:</span>
-                  <span className="tabular-nums">${grandTotal}</span>
+                  <span>Total yang Dibayar:</span>
+                  <span className="tabular-nums">{formatRupiah(grandTotal)}</span>
                 </div>
               </div>
 
@@ -503,14 +503,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-stone-900 dark:text-stone-200 bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 hover:bg-stone-50 dark:hover:bg-stone-700 rounded-lg cursor-pointer"
                 >
                   <Printer className="w-4 h-4 text-stone-600 dark:text-stone-400" />
-                  <span>Print Receipt / Claim Invoice</span>
+                  <span>Cetak Kuitansi / Faktur Klaim</span>
                 </button>
 
                 <button
                   onClick={onClose}
                   className="px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 dark:bg-teal-800 hover:bg-stone-800 dark:hover:bg-teal-700 rounded-lg cursor-pointer"
                 >
-                  Back to Store
+                  Kembali ke Toko
                 </button>
               </div>
             </div>

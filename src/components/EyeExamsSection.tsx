@@ -1,5 +1,5 @@
 import React from 'react';
-import { CLINIC_SERVICES } from '../data/mockOpticalData';
+import { CLINIC_SERVICES, formatRupiah } from '../data/mockOpticalData';
 import { Calendar, Clock, ShieldCheck } from 'lucide-react';
 
 interface EyeExamsSectionProps {
@@ -14,20 +14,20 @@ export const EyeExamsSection: React.FC<EyeExamsSectionProps> = ({ onBookService 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 dark:border-stone-800 pb-6">
           <div className="space-y-2">
             <span className="text-xs uppercase tracking-wider text-teal-800 dark:text-teal-400 font-semibold">
-              Clinical Optometry
+              Optometri Klinis
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-stone-900 dark:text-stone-100 tracking-tight">
-              Comprehensive Eye Care & Frame Fittings
+              Pemeriksaan Mata Komprehensif & Fitting Bingkai
             </h2>
             <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 max-w-xl">
-              An eye exam is more than just reading letters off a chart. We screen for early signs of glaucoma, 
-              macular degeneration, diabetic retinopathy, and subtle ocular surface imbalances.
+              Pemeriksaan mata bukan sekadar membaca baris huruf di dinding. Kami mendeteksi tanda awal glaukoma, 
+              gangguan retina, mata kering kronis, serta keseimbangan penglihatan binokular Anda.
             </p>
           </div>
 
           <div className="flex items-center gap-2 text-xs text-stone-600 dark:text-stone-400">
             <ShieldCheck className="w-4 h-4 text-teal-800 dark:text-teal-400" />
-            <span>Direct insurance claims billed for VSP, EyeMed & Medicare</span>
+            <span>Kwitansi & formulir resmi untuk klaim asuransi kesehatan</span>
           </div>
         </div>
 
@@ -45,7 +45,7 @@ export const EyeExamsSection: React.FC<EyeExamsSectionProps> = ({ onBookService 
                     <span>{service.duration}</span>
                   </div>
                   <span className="font-bold text-stone-900 dark:text-stone-100 text-sm tabular-nums">
-                    {service.price === 0 ? 'Complimentary' : `$${service.price}`}
+                    {service.price === 0 ? 'Gratis' : formatRupiah(service.price)}
                   </span>
                 </div>
 
@@ -60,7 +60,7 @@ export const EyeExamsSection: React.FC<EyeExamsSectionProps> = ({ onBookService 
 
               <div className="pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
                 <span className="text-[11px] text-teal-800 dark:text-teal-400 font-medium">
-                  {service.coveredByInsurance ? 'Insurance Eligible' : 'In-Clinic Service'}
+                  {service.coveredByInsurance ? 'Bisa Klaim Asuransi' : 'Layanan di Klinik'}
                 </span>
 
                 <button
@@ -68,7 +68,7 @@ export const EyeExamsSection: React.FC<EyeExamsSectionProps> = ({ onBookService 
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-stone-900 dark:text-stone-100 bg-stone-100 dark:bg-stone-800 hover:bg-stone-900 hover:text-white dark:hover:bg-teal-800 rounded-lg transition-colors cursor-pointer"
                 >
                   <Calendar className="w-3.5 h-3.5" />
-                  <span>Book Visit</span>
+                  <span>Pesan Jadwal</span>
                 </button>
               </div>
             </div>
@@ -79,28 +79,28 @@ export const EyeExamsSection: React.FC<EyeExamsSectionProps> = ({ onBookService 
         <div className="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="space-y-2">
             <h4 className="font-serif font-semibold text-stone-900 dark:text-stone-100 text-base">
-              1. Digital Wavefront Refraction
+              1. Refraksi Digital Wavefront
             </h4>
             <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed">
-              We capture over 1,500 data points across your cornea to identify higher-order aberrations, guaranteeing 20/20 clarity without night halos.
+              Kami memetakan lebih dari 1.500 titik data di kornea untuk mengidentifikasi aberasi halus, memastikan ketajaman 20/20 tanpa efek silau di malam hari.
             </p>
           </div>
 
           <div className="space-y-2">
             <h4 className="font-serif font-semibold text-stone-900 dark:text-stone-100 text-base">
-              2. Optomap Ultra-Widefield Scan
+              2. Pemindaian Retina Resolusi Tinggi
             </h4>
             <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed">
-              View up to 82% of your retina in a single 0.25-second digital capture—frequently eliminating the need for uncomfortable dilating eye drops.
+              Melihat kondisi retina dan pembuluh darah mata secara detail dalam 0.25 detik tanpa tetes mata yang mengaburkan penglihatan.
             </p>
           </div>
 
           <div className="space-y-2">
             <h4 className="font-serif font-semibold text-stone-900 dark:text-stone-100 text-base">
-              3. Custom Anatomical Frame Fit
+              3. Fitting Bingkai Berbasis Anatomi
             </h4>
             <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed">
-              Our master opticians sculpt the temple curve, adjust nose pads, and balance bridge distribution so your glasses never slip down your nose.
+              Master optisi kami menyesuaikan kelengkungan tangkai, bantalan hidung, dan sudut kemiringan agar kacamata terpasang stabil dan nyaman di hidung Anda.
             </p>
           </div>
         </div>

@@ -21,11 +21,11 @@ export default function App() {
   // Navigation active tracker
   const [activeSection, setActiveSection] = useState('home');
 
-  // Dark mode state - default to true since user requested dark mode!
+  // Dark mode state - Light mode is default as requested, with dark mode toggle fully available!
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    const saved = localStorage.getItem('lumina-theme');
+    const saved = localStorage.getItem('krostell-theme');
     if (saved !== null) return saved === 'dark';
-    return true; // Default to dark mode as requested by user
+    return false; // Default to Light Mode
   });
 
   // Apply dark mode class to html document element
@@ -33,11 +33,11 @@ export default function App() {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
       document.body.classList.add('dark');
-      localStorage.setItem('lumina-theme', 'dark');
+      localStorage.setItem('krostell-theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
       document.body.classList.remove('dark');
-      localStorage.setItem('lumina-theme', 'light');
+      localStorage.setItem('krostell-theme', 'light');
     }
   }, [isDarkMode]);
 
@@ -58,12 +58,12 @@ export default function App() {
   const [isPdToolOpen, setIsPdToolOpen] = useState(false);
 
   // Promo code
-  const [appliedPromo, setAppliedPromo] = useState('AUTUMN26');
+  const [appliedPromo, setAppliedPromo] = useState('KROSTELL26');
 
   // Shopping cart items with initial sample prescription frame for immediate realism
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
-      cartItemId: 'lum-sample-1',
+      cartItemId: 'kros-sample-1',
       product: FEATURED_FRAMES[0],
       selectedColor: FEATURED_FRAMES[0].colors[0],
       lensType: 'single-vision',
@@ -72,8 +72,8 @@ export default function App() {
       selectedCoatings: [
         {
           id: 'anti-reflective-base',
-          name: 'Super Hydrophobic Multi-AR Coating',
-          description: 'Anti-reflective standard coating',
+          name: 'Lapisan Multi-AR Super Hidrofobik',
+          description: 'Lapisan standar anti-pantul & kejernihan optik',
           price: 0,
         },
       ],
@@ -87,7 +87,7 @@ export default function App() {
         pupillaryDistance: 63,
         rxMethod: 'manual',
       },
-      totalPrice: 175,
+      totalPrice: 1750000,
       quantity: 1,
     },
   ]);
